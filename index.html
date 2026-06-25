@@ -984,7 +984,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <button class="btn" onclick="exportData()">Backup JSON</button>
     <button class="btn" onclick="document.getElementById('importFile').click()">Importar</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block;">🌐 Publicar dados</button>
+    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block; background: rgb(16, 185, 129);" disabled="">✅ Publicado!</button>
     <button class="btn" id="publishHtmlBtn" onclick="publishHTMLToGitHub()" title="Publicar o arquivo HTML completo como index.html no repositório" style="display: inline-block;" disabled="">⏳ Publicando HTML...</button>
     <button class="btn" id="ghConfigBtn" onclick="openGhConfigModal()" title="Configurar conexão com Vercel/GitHub" style="display: inline-block;">⚙️ Vercel</button>
   </div>

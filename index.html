@@ -433,7 +433,11 @@ body[data-theme="dark-green"] .cycle-item input { background: #134e4a; border-co
 .metrics-grid-header { display: grid; grid-template-columns: 155px 1fr 1fr 68px; gap: 6px; font-size: 10px; font-weight: 700; color: #64748b; padding: 0 4px 6px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; }
 .metric-row { display: grid; grid-template-columns: 155px 1fr 1fr 68px; gap: 6px; align-items: center; padding: 4px; border-radius: 6px; }
 .metric-row:hover { background: #f8fafc; }
-.metric-row-label { font-size: 12px; font-weight: 600; color: #334155; }
+.metric-row-label { font-size: 12px; font-weight: 600; color: #334155; display: flex; flex-direction: column; gap: 3px; }
+.metric-process-select { font-size: 10px; font-family: inherit; border: 1px solid #e2e8f0; border-radius: 4px; padding: 2px 4px; color: #475569; background: #f8fafc; cursor: pointer; width: 100%; }
+.metric-process-select:focus { outline: none; border-color: #2563eb; }
+body[data-theme="dark"] .metric-process-select { background: #0f172a; border-color: #334155; color: #94a3b8; }
+body[data-theme="dark-green"] .metric-process-select { background: #042f2e; border-color: #1e6e68; color: #6ee7b7; }
 .metric-row input[type=number], .metric-row input[type=text] { border: 1px solid #d1d5db; padding: 5px 7px; border-radius: 6px; font-size: 12px; font-family: inherit; background: white; color: #0f172a; width: 100%; }
 .metric-row input[type=number]:focus, .metric-row input[type=text]:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,0.1); }
 .metric-link-row { display: flex; align-items: center; gap: 5px; padding: 1px 4px 5px; border-bottom: 1px solid #f1f5f9; margin-bottom: 2px; }
@@ -957,7 +961,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <button class="btn" onclick="exportData()">Backup JSON</button>
     <button class="btn" onclick="document.getElementById('importFile').click()">Importar</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block;">🌐 Publicar dados</button>
+    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block; background: rgb(16, 185, 129);" disabled="">✅ Publicado!</button>
     <button class="btn" id="publishHtmlBtn" onclick="publishHTMLToGitHub()" title="Publicar o arquivo HTML completo como index.html no repositório" style="display: inline-block;" disabled="">⏳ Publicando HTML...</button>
     <button class="btn" id="ghConfigBtn" onclick="openGhConfigModal()" title="Configurar conexão com Vercel/GitHub" style="display: inline-block;">⚙️ Vercel</button>
   </div>
@@ -981,7 +985,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
 </div>
 
 <div class="stats" id="stats">
-    <div class="stat"><div class="stat-label">Total</div><div class="stat-value">31</div></div>
+    <div class="stat"><div class="stat-label">Total</div><div class="stat-value">32</div></div>
     <div class="stat"><div class="stat-label">Em Andamento</div><div class="stat-value">6</div></div>
     <div class="stat"><div class="stat-label">Feito</div><div class="stat-value">10</div></div>
     <div class="stat"><div class="stat-label">Atrasadas</div><div class="stat-value" style="color:#dc2626">4</div></div>
@@ -992,7 +996,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
   <div class="board" id="board"><div class="column">
       <div class="column-header">
         <div class="column-title"><span class="column-dot" style="background:#94a3b8"></span>Backlog</div>
-        <span class="column-count " onclick="editWipLimit('backlog')" title="Sem limite. Clique para definir limite WIP.">9</span>
+        <span class="column-count " onclick="editWipLimit('backlog')" title="Sem limite. Clique para definir limite WIP.">10</span>
       </div>
       <div class="cards" data-column="backlog"><div class="card card-priority-media" draggable="true">
     <div class="card-title">Novo Layout do Check out</div>
@@ -1120,6 +1124,21 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-meta">
       <div class="tags">
         <span class="tag" style="background:#d1fae5;color:#065f46">Reuniões com a equipe</span>
+        <span class="tag tag-priority-media">Média</span>
+      </div>
+      
+    </div>
+    
+    
+    
+    
+    
+  </div><div class="card card-priority-media" draggable="true">
+    <div class="card-title">teste6666666666</div>
+    
+    <div class="card-meta">
+      <div class="tags">
+        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1635,7 +1654,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <input type="text" id="ghBranch" placeholder="main" value="main">
     </div>
 
-    <div id="ghConfigStatus" style="display: block; padding: 8px 12px; border-radius: 6px; font-size: 13px; margin-bottom: 8px; background: rgb(209, 250, 229); color: rgb(6, 95, 70);">✅ Conexão OK! Repositório encontrado.</div>
+    <div id="ghConfigStatus" style="display:none;padding:8px 12px;border-radius:6px;font-size:13px;margin-bottom:8px"></div>
 
     <div class="modal-actions">
       <button class="btn" onclick="testGhConnection()">🔌 Testar conexão</button>
@@ -1680,8 +1699,8 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
 <!-- Modal -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
-    <h2 id="modalTitle">Nova Tarefa</h2>
-    <input type="hidden" id="taskId">
+    <h2 id="modalTitle">Editar Tarefa</h2>
+    <input type="hidden" id="taskId" value="t_mqr9qyr3_cvccp">
     <div class="form-group">
       <label>O que fazer? *</label>
       <input type="text" id="title" placeholder="Ex: Mapear fluxo do recebimento de mercadorias">
@@ -1751,7 +1770,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
 
     <div class="form-group attachments-section">
       <label>📎 Anexos / Links</label>
-      <div class="attachments-list" id="attachmentsList"></div>
+      <div class="attachments-list" id="attachmentsList"><div style="font-size:11px;color:#94a3b8;font-style:italic;padding:4px 2px">Nenhum anexo. Use o campo abaixo para adicionar links.</div></div>
       <div class="attachment-add">
         <input type="url" id="newAttachUrl" placeholder="Cole URL (planilha, doc, drive, link...)" onkeydown="if(event.key==='Enter'){event.preventDefault();addAttachment();}">
         <button type="button" onclick="addAttachment()">+ Adicionar</button>
@@ -1762,7 +1781,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
 
     <div class="subtasks-section">
       <label>📋 Subtarefas</label>
-      <div class="subtasks-list" id="subtasksList"></div>
+      <div class="subtasks-list" id="subtasksList"><div style="font-size:11px;color:#94a3b8;font-style:italic;padding:4px 2px">Nenhuma subtarefa. Use o campo abaixo para adicionar.</div></div>
       <div class="subtask-add">
         <input type="text" id="newSubtask" placeholder="Adicionar subtarefa..." onkeydown="if(event.key==='Enter'){event.preventDefault();addSubtask();}">
         <button type="button" onclick="addSubtask()">+ Add</button>
@@ -1774,17 +1793,161 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="metrics-grid-header">
         <span>Indicador</span><span>Antes</span><span>Agora</span><span>Unidade</span>
       </div>
-      <div id="metricsGrid"></div>
+      <div id="metricsGrid"><div class="metric-row">
+      <div class="metric-row-label">
+        <span>⏱ Tempo médio</span>
+        <select class="metric-process-select" onchange="modalMetrics['tempo_medio'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
+      </div>
+      <input type="number" id="metric_before_tempo_medio" step="0.01" placeholder="—" value="" oninput="modalMetrics['tempo_medio'].before=this.value">
+      <input type="number" id="metric_after_tempo_medio" step="0.01" placeholder="—" value="" oninput="modalMetrics['tempo_medio'].after=this.value">
+      <input type="text" placeholder="min" value="min" oninput="modalMetrics['tempo_medio'].unit=this.value" style="text-align:center">
+    </div>
+    <div class="metric-link-row">
+      <input type="url" id="metric_link_tempo_medio" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['tempo_medio'].link=this.value; updateMetricLinkBtn('tempo_medio'); checkSheetBtn('tempo_medio')" onpaste="setTimeout(()=&gt;{modalMetrics['tempo_medio'].link=this.value;updateMetricLinkBtn('tempo_medio');checkSheetBtn('tempo_medio');},50)">
+      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('tempo_medio')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
+      <button type="button" id="metric_paste_tempo_medio" class="metric-paste-btn" onclick="pasteMetricLink('tempo_medio')" title="Colar link copiado">📋</button>
+      <button type="button" id="metric_sync_tempo_medio" class="metric-sync-btn " onclick="toggleSheetConfig('tempo_medio')" title="Configurar leitura da planilha">🔄</button>
+      <button type="button" id="metric_link_btn_tempo_medio" class="metric-link-open " title="Abrir link" onclick="openMetricLink('tempo_medio')">↗</button>
+    </div>
+    <div class="metric-sheet-config" id="metric_sheet_cfg_tempo_medio">
+      <label>Aba:</label>
+      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['tempo_medio'].sheetConfig.sheetName=this.value">
+      <label>Antes:</label>
+      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['tempo_medio'].sheetConfig.cellAntes=this.value">
+      <label>Agora:</label>
+      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['tempo_medio'].sheetConfig.cellAgora=this.value">
+      <button type="button" id="metric_fetch_tempo_medio" class="metric-fetch-btn" onclick="fetchSheetData('tempo_medio')">⬇ Buscar</button>
+    </div><div class="metric-row">
+      <div class="metric-row-label">
+        <span>📐 Ganho de espaço</span>
+        <select class="metric-process-select" onchange="modalMetrics['ganho_espaco'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
+      </div>
+      <input type="number" id="metric_before_ganho_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['ganho_espaco'].before=this.value">
+      <input type="number" id="metric_after_ganho_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['ganho_espaco'].after=this.value">
+      <input type="text" placeholder="m²" value="m²" oninput="modalMetrics['ganho_espaco'].unit=this.value" style="text-align:center">
+    </div>
+    <div class="metric-link-row">
+      <input type="url" id="metric_link_ganho_espaco" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['ganho_espaco'].link=this.value; updateMetricLinkBtn('ganho_espaco'); checkSheetBtn('ganho_espaco')" onpaste="setTimeout(()=&gt;{modalMetrics['ganho_espaco'].link=this.value;updateMetricLinkBtn('ganho_espaco');checkSheetBtn('ganho_espaco');},50)">
+      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('ganho_espaco')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
+      <button type="button" id="metric_paste_ganho_espaco" class="metric-paste-btn" onclick="pasteMetricLink('ganho_espaco')" title="Colar link copiado">📋</button>
+      <button type="button" id="metric_sync_ganho_espaco" class="metric-sync-btn " onclick="toggleSheetConfig('ganho_espaco')" title="Configurar leitura da planilha">🔄</button>
+      <button type="button" id="metric_link_btn_ganho_espaco" class="metric-link-open " title="Abrir link" onclick="openMetricLink('ganho_espaco')">↗</button>
+    </div>
+    <div class="metric-sheet-config" id="metric_sheet_cfg_ganho_espaco">
+      <label>Aba:</label>
+      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['ganho_espaco'].sheetConfig.sheetName=this.value">
+      <label>Antes:</label>
+      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['ganho_espaco'].sheetConfig.cellAntes=this.value">
+      <label>Agora:</label>
+      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['ganho_espaco'].sheetConfig.cellAgora=this.value">
+      <button type="button" id="metric_fetch_ganho_espaco" class="metric-fetch-btn" onclick="fetchSheetData('ganho_espaco')">⬇ Buscar</button>
+    </div><div class="metric-row">
+      <div class="metric-row-label">
+        <span>📦 Itens por espaço</span>
+        <select class="metric-process-select" onchange="modalMetrics['capacidade_espaco'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
+      </div>
+      <input type="number" id="metric_before_capacidade_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['capacidade_espaco'].before=this.value">
+      <input type="number" id="metric_after_capacidade_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['capacidade_espaco'].after=this.value">
+      <input type="text" placeholder="itens" value="itens" oninput="modalMetrics['capacidade_espaco'].unit=this.value" style="text-align:center">
+    </div>
+    <div class="metric-link-row">
+      <input type="url" id="metric_link_capacidade_espaco" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['capacidade_espaco'].link=this.value; updateMetricLinkBtn('capacidade_espaco'); checkSheetBtn('capacidade_espaco')" onpaste="setTimeout(()=&gt;{modalMetrics['capacidade_espaco'].link=this.value;updateMetricLinkBtn('capacidade_espaco');checkSheetBtn('capacidade_espaco');},50)">
+      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('capacidade_espaco')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
+      <button type="button" id="metric_paste_capacidade_espaco" class="metric-paste-btn" onclick="pasteMetricLink('capacidade_espaco')" title="Colar link copiado">📋</button>
+      <button type="button" id="metric_sync_capacidade_espaco" class="metric-sync-btn " onclick="toggleSheetConfig('capacidade_espaco')" title="Configurar leitura da planilha">🔄</button>
+      <button type="button" id="metric_link_btn_capacidade_espaco" class="metric-link-open " title="Abrir link" onclick="openMetricLink('capacidade_espaco')">↗</button>
+    </div>
+    <div class="metric-sheet-config" id="metric_sheet_cfg_capacidade_espaco">
+      <label>Aba:</label>
+      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['capacidade_espaco'].sheetConfig.sheetName=this.value">
+      <label>Antes:</label>
+      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['capacidade_espaco'].sheetConfig.cellAntes=this.value">
+      <label>Agora:</label>
+      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['capacidade_espaco'].sheetConfig.cellAgora=this.value">
+      <button type="button" id="metric_fetch_capacidade_espaco" class="metric-fetch-btn" onclick="fetchSheetData('capacidade_espaco')">⬇ Buscar</button>
+    </div><div class="metric-row">
+      <div class="metric-row-label">
+        <span>🚶 Percurso</span>
+        <select class="metric-process-select" onchange="modalMetrics['percurso'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
+      </div>
+      <input type="number" id="metric_before_percurso" step="0.01" placeholder="—" value="" oninput="modalMetrics['percurso'].before=this.value">
+      <input type="number" id="metric_after_percurso" step="0.01" placeholder="—" value="" oninput="modalMetrics['percurso'].after=this.value">
+      <input type="text" placeholder="m" value="m" oninput="modalMetrics['percurso'].unit=this.value" style="text-align:center">
+    </div>
+    <div class="metric-link-row">
+      <input type="url" id="metric_link_percurso" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['percurso'].link=this.value; updateMetricLinkBtn('percurso'); checkSheetBtn('percurso')" onpaste="setTimeout(()=&gt;{modalMetrics['percurso'].link=this.value;updateMetricLinkBtn('percurso');checkSheetBtn('percurso');},50)">
+      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('percurso')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
+      <button type="button" id="metric_paste_percurso" class="metric-paste-btn" onclick="pasteMetricLink('percurso')" title="Colar link copiado">📋</button>
+      <button type="button" id="metric_sync_percurso" class="metric-sync-btn " onclick="toggleSheetConfig('percurso')" title="Configurar leitura da planilha">🔄</button>
+      <button type="button" id="metric_link_btn_percurso" class="metric-link-open " title="Abrir link" onclick="openMetricLink('percurso')">↗</button>
+    </div>
+    <div class="metric-sheet-config" id="metric_sheet_cfg_percurso">
+      <label>Aba:</label>
+      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['percurso'].sheetConfig.sheetName=this.value">
+      <label>Antes:</label>
+      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['percurso'].sheetConfig.cellAntes=this.value">
+      <label>Agora:</label>
+      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['percurso'].sheetConfig.cellAgora=this.value">
+      <button type="button" id="metric_fetch_percurso" class="metric-fetch-btn" onclick="fetchSheetData('percurso')">⬇ Buscar</button>
+    </div><div class="metric-row">
+      <div class="metric-row-label">
+        <span>⚠️ Não-Conformidades</span>
+        <select class="metric-process-select" onchange="modalMetrics['nao_conformidades'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
+      </div>
+      <input type="number" id="metric_before_nao_conformidades" step="0.01" placeholder="—" value="" oninput="modalMetrics['nao_conformidades'].before=this.value">
+      <input type="number" id="metric_after_nao_conformidades" step="0.01" placeholder="—" value="" oninput="modalMetrics['nao_conformidades'].after=this.value">
+      <input type="text" placeholder="un" value="un" oninput="modalMetrics['nao_conformidades'].unit=this.value" style="text-align:center">
+    </div>
+    <div class="metric-link-row">
+      <input type="url" id="metric_link_nao_conformidades" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['nao_conformidades'].link=this.value; updateMetricLinkBtn('nao_conformidades'); checkSheetBtn('nao_conformidades')" onpaste="setTimeout(()=&gt;{modalMetrics['nao_conformidades'].link=this.value;updateMetricLinkBtn('nao_conformidades');checkSheetBtn('nao_conformidades');},50)">
+      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('nao_conformidades')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
+      <button type="button" id="metric_paste_nao_conformidades" class="metric-paste-btn" onclick="pasteMetricLink('nao_conformidades')" title="Colar link copiado">📋</button>
+      <button type="button" id="metric_sync_nao_conformidades" class="metric-sync-btn " onclick="toggleSheetConfig('nao_conformidades')" title="Configurar leitura da planilha">🔄</button>
+      <button type="button" id="metric_link_btn_nao_conformidades" class="metric-link-open " title="Abrir link" onclick="openMetricLink('nao_conformidades')">↗</button>
+    </div>
+    <div class="metric-sheet-config" id="metric_sheet_cfg_nao_conformidades">
+      <label>Aba:</label>
+      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['nao_conformidades'].sheetConfig.sheetName=this.value">
+      <label>Antes:</label>
+      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['nao_conformidades'].sheetConfig.cellAntes=this.value">
+      <label>Agora:</label>
+      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['nao_conformidades'].sheetConfig.cellAgora=this.value">
+      <button type="button" id="metric_fetch_nao_conformidades" class="metric-fetch-btn" onclick="fetchSheetData('nao_conformidades')">⬇ Buscar</button>
+    </div><div class="metric-row">
+      <div class="metric-row-label">
+        <span>💰 Resultado financeiro</span>
+        <select class="metric-process-select" onchange="modalMetrics['resultado_financeiro'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
+      </div>
+      <input type="number" id="metric_before_resultado_financeiro" step="0.01" placeholder="—" value="" oninput="modalMetrics['resultado_financeiro'].before=this.value">
+      <input type="number" id="metric_after_resultado_financeiro" step="0.01" placeholder="—" value="" oninput="modalMetrics['resultado_financeiro'].after=this.value">
+      <input type="text" placeholder="R$" value="R$" oninput="modalMetrics['resultado_financeiro'].unit=this.value" style="text-align:center">
+    </div>
+    <div class="metric-link-row">
+      <input type="url" id="metric_link_resultado_financeiro" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['resultado_financeiro'].link=this.value; updateMetricLinkBtn('resultado_financeiro'); checkSheetBtn('resultado_financeiro')" onpaste="setTimeout(()=&gt;{modalMetrics['resultado_financeiro'].link=this.value;updateMetricLinkBtn('resultado_financeiro');checkSheetBtn('resultado_financeiro');},50)">
+      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('resultado_financeiro')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
+      <button type="button" id="metric_paste_resultado_financeiro" class="metric-paste-btn" onclick="pasteMetricLink('resultado_financeiro')" title="Colar link copiado">📋</button>
+      <button type="button" id="metric_sync_resultado_financeiro" class="metric-sync-btn " onclick="toggleSheetConfig('resultado_financeiro')" title="Configurar leitura da planilha">🔄</button>
+      <button type="button" id="metric_link_btn_resultado_financeiro" class="metric-link-open " title="Abrir link" onclick="openMetricLink('resultado_financeiro')">↗</button>
+    </div>
+    <div class="metric-sheet-config" id="metric_sheet_cfg_resultado_financeiro">
+      <label>Aba:</label>
+      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['resultado_financeiro'].sheetConfig.sheetName=this.value">
+      <label>Antes:</label>
+      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['resultado_financeiro'].sheetConfig.cellAntes=this.value">
+      <label>Agora:</label>
+      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['resultado_financeiro'].sheetConfig.cellAgora=this.value">
+      <button type="button" id="metric_fetch_resultado_financeiro" class="metric-fetch-btn" onclick="fetchSheetData('resultado_financeiro')">⬇ Buscar</button>
+    </div></div>
     </div>
     <div style="font-size:10px;color:#94a3b8;margin-top:6px">Preencha "Antes" e "Agora" para calcular o ganho automaticamente. Deixe em branco os que não se aplicam.</div>
 
     <div class="modal-actions">
-      <button class="btn btn-danger" id="deleteBtn" onclick="deleteTask()" style="display:none">Excluir</button>
-      <button class="btn" id="archiveBtn" onclick="archiveTask()" style="display:none;background:#f1f5f9;border-color:#cbd5e1;color:#475569" title="Arquivar card — teve andamento mas não será concluído">🗂️ Arquivar</button>
+      <button class="btn btn-danger" id="deleteBtn" onclick="deleteTask()" style="display: inline-block;">Excluir</button>
+      <button class="btn" id="archiveBtn" onclick="archiveTask()" style="display: inline-block; background: rgb(241, 245, 249); border-color: rgb(203, 213, 225); color: rgb(71, 85, 105);" title="Arquivar card — teve andamento mas não será concluído">🗂️ Arquivar</button>
       <button class="btn btn-primary" id="restoreBtn" onclick="restoreTask()" style="display:none">↩️ Restaurar</button>
       <div class="right" style="margin-left:auto">
         <button class="btn" onclick="closeModal()">Cancelar</button>
-        <button class="btn btn-primary" id="saveTaskBtn" onclick="saveTask()">Salvar</button>
+        <button class="btn btn-primary" id="saveTaskBtn" onclick="saveTask()" style="display: inline-block;">Salvar</button>
       </div>
     </div>
   </div>
@@ -2389,7 +2552,7 @@ function renderGainBadge(t) {
     html += `<div class="gain-badge ${cls}" style="flex-direction:column;align-items:stretch">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:6px">
         <div style="flex:1;min-width:0">
-          <div class="gain-detail" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.icon||'📊'} ${escapeHtml(g.label)}</div>
+          <div class="gain-detail" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.icon||'📊'} ${escapeHtml(g.label)}${g.process ? ` <span style="font-weight:700;opacity:0.9">· ${escapeHtml(g.process)}</span>` : ''}</div>
           <div class="gain-detail" style="margin-top:2px">${fmt(g.before)} → ${fmt(g.after)} ${escapeHtml(g.unit)}</div>
         </div>
         <div class="gain-value">${arrow} ${pctAbs}%</div>
@@ -3637,10 +3800,11 @@ function renderMetricsGrid(metricsData) {
   PREDEFINED_METRICS.forEach(pm => {
     const saved = metricsData && metricsData[pm.id];
     modalMetrics[pm.id] = {
-      before: saved ? (saved.before !== undefined && saved.before !== '' ? saved.before : '') : '',
-      after:  saved ? (saved.after  !== undefined && saved.after  !== '' ? saved.after  : '') : '',
-      unit:   saved ? (saved.unit   || pm.defaultUnit) : pm.defaultUnit,
-      link:   saved ? (saved.link   || '') : '',
+      before:   saved ? (saved.before !== undefined && saved.before !== '' ? saved.before : '') : '',
+      after:    saved ? (saved.after  !== undefined && saved.after  !== '' ? saved.after  : '') : '',
+      unit:     saved ? (saved.unit   || pm.defaultUnit) : pm.defaultUnit,
+      link:     saved ? (saved.link   || '') : '',
+      process:  saved ? (saved.process || '') : '',
       sheetConfig: saved?.sheetConfig || { sheetName: '', cellAntes: 'B2', cellAgora: 'C2' }
     };
   });
@@ -3651,8 +3815,13 @@ function renderMetricsGrid(metricsData) {
     const hasLink = d.link && d.link.trim();
     const isSheet = isGSheetUrl(d.link);
     const sc = d.sheetConfig || {};
+    const processOpts = ['','Separação','Armazenagem','Checking','Checkout','Recebimento','Expedição','Outro'];
+    const processSel = processOpts.map(o => `<option value="${o}" ${d.process===o?'selected':''}>${o||'— Processo —'}</option>`).join('');
     return `<div class="metric-row">
-      <div class="metric-row-label">${pm.icon} ${escapeHtml(pm.label)}</div>
+      <div class="metric-row-label">
+        <span>${pm.icon} ${escapeHtml(pm.label)}</span>
+        <select class="metric-process-select" onchange="modalMetrics['${pm.id}'].process=this.value" title="Processo onde o ganho foi medido">${processSel}</select>
+      </div>
       <input type="number" id="metric_before_${pm.id}" step="0.01" placeholder="—" value="${escapeHtml(String(d.before))}" oninput="modalMetrics['${pm.id}'].before=this.value">
       <input type="number" id="metric_after_${pm.id}" step="0.01" placeholder="—" value="${escapeHtml(String(d.after))}" oninput="modalMetrics['${pm.id}'].after=this.value">
       <input type="text" placeholder="${escapeHtml(pm.defaultUnit)}" value="${escapeHtml(d.unit)}" oninput="modalMetrics['${pm.id}'].unit=this.value" style="text-align:center">
@@ -3921,7 +4090,7 @@ function computeAllGains(task) {
       const delta = after - before;
       const pct = (delta / Math.abs(before)) * 100;
       const isImprovement = pm.direction === 'reducao' ? delta < 0 : delta > 0;
-      results.push({ id: pm.id, label: pm.label, icon: pm.icon, before, after, unit: m.unit || pm.defaultUnit, link: m.link || '', delta, pct, direction: pm.direction, isImprovement, hasMeasure: true });
+      results.push({ id: pm.id, label: pm.label, icon: pm.icon, before, after, unit: m.unit || pm.defaultUnit, link: m.link || '', process: m.process || '', delta, pct, direction: pm.direction, isImprovement, hasMeasure: true });
     });
   }
   // Legacy single-metric format (backward compat)

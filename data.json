@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "publishedAt": "2026-06-25T20:37:47.323Z",
+  "publishedAt": "2026-06-25T22:47:40.522Z",
   "projects": [
     {
       "id": "novo",
@@ -263,7 +263,77 @@
             "enteredAt": "2026-06-23T23:21:52.239Z"
           }
         ],
-        "attachments": []
+        "attachments": [],
+        "cycleId": null,
+        "metrics": {
+          "tempo_medio": {
+            "before": "",
+            "after": "",
+            "unit": "min",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "ganho_espaco": {
+            "before": "",
+            "after": "",
+            "unit": "m²",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "capacidade_espaco": {
+            "before": "",
+            "after": "",
+            "unit": "itens",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "percurso": {
+            "before": "",
+            "after": "",
+            "unit": "m",
+            "link": "https://docs.google.com/spreadsheets/d/1B-eoHEhGq_lXesHRNiXa9bmixnriRhqbe_oNnA_rUi4/edit?usp=sharing",
+            "sheetConfig": {
+              "sheetName": "Teste",
+              "cellAntes": "J9",
+              "cellAgora": "K9"
+            }
+          },
+          "nao_conformidades": {
+            "before": "",
+            "after": "",
+            "unit": "un",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "resultado_financeiro": {
+            "before": "",
+            "after": "",
+            "unit": "R$",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          }
+        },
+        "subtasks": []
       },
       {
         "id": "t_mqr9qyr3_r1wkr",

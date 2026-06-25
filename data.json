@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "publishedAt": "2026-06-25T20:00:43.966Z",
+  "publishedAt": "2026-06-25T20:37:47.323Z",
   "projects": [
     {
       "id": "novo",
@@ -536,6 +536,93 @@
           }
         ],
         "attachments": []
+      },
+      {
+        "id": "t_mqtyr2im_nh0d9",
+        "title": "teste6666666666",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "cycleId": null,
+        "attachments": [],
+        "metrics": {
+          "tempo_medio": {
+            "before": "",
+            "after": "",
+            "unit": "min",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "ganho_espaco": {
+            "before": "",
+            "after": "",
+            "unit": "m²",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "capacidade_espaco": {
+            "before": "",
+            "after": "",
+            "unit": "itens",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "percurso": {
+            "before": "",
+            "after": "",
+            "unit": "m",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "nao_conformidades": {
+            "before": "",
+            "after": "",
+            "unit": "un",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          },
+          "resultado_financeiro": {
+            "before": "",
+            "after": "",
+            "unit": "R$",
+            "link": "",
+            "sheetConfig": {
+              "sheetName": "",
+              "cellAntes": "B2",
+              "cellAgora": "C2"
+            }
+          }
+        },
+        "subtasks": [],
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-25T20:37:19.870Z"
+          }
+        ]
       }
     ]
   },

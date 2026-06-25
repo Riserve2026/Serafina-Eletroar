@@ -1,0 +1,551 @@
+{
+  "version": 1,
+  "publishedAt": "2026-06-25T20:00:43.966Z",
+  "projects": [
+    {
+      "id": "novo",
+      "name": "Serafina Eletroar"
+    }
+  ],
+  "activeProjectId": "novo",
+  "tasksByProject": {
+    "novo": [
+      {
+        "id": "t_mqr9qyr3_frn7o",
+        "title": "Organizar paletes de expedição",
+        "description": "Organização visual do ambiente na área de carga de mercadoria",
+        "status": "feito",
+        "priority": "media",
+        "category": "gestao_visual",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_ztsmu",
+        "title": "Demarcação da área de recebimento",
+        "description": "Demarcar área de acomodação de mercadoria pós descarga",
+        "status": "feito",
+        "priority": "media",
+        "category": "gestao_visual",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_gm1u6",
+        "title": "Feedback com Mariana",
+        "description": "",
+        "status": "feito",
+        "priority": "media",
+        "category": "feedbacks_individuais",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_ig2sp",
+        "title": "Feedback com Eduardo (Recebimento)",
+        "description": "Conversa para conhecer melhor o comportamento individual e orientar como será o andamento do projeto",
+        "status": "feito",
+        "priority": "media",
+        "category": "feedbacks_individuais",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_dygyt",
+        "title": "Feedback com Natam, novo líder do recebimento",
+        "description": "Conversa de forma geral, sobre postura e desafios da nova posição de trabalho",
+        "status": "feito",
+        "priority": "media",
+        "category": "feedbacks_individuais",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_6hrrn",
+        "title": "Organizar correias-Gates",
+        "description": "Correias da Gates estão espalhadas pelo chão, no mezanino",
+        "status": "feito",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_aoru4",
+        "title": "Reunião com a equipe",
+        "description": "Objetivo da reunião é conscientizar a equipe sobre a organização que está sendo feita no estoque. A reunião foi feita em grupos. Reunião realizada na rua 01",
+        "status": "feito",
+        "priority": "media",
+        "category": "reunioes_equipe",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_h3z84",
+        "title": "Emissão do relatório de Giro ABC",
+        "description": "",
+        "status": "feito",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_gkk2q",
+        "title": "Organização das palhetas",
+        "description": "Palhetas estão todas misturadas e desorganizadas, organização prévia das palhetas de vetor aproveitando o momento de folga da separação Rua 33 térreo",
+        "status": "feito",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_qgawg",
+        "title": "Colocado a impressora de etiquetas da São Miguel, na expedição",
+        "description": "Impressora estava na mesa do Bernardo",
+        "status": "feito",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "feito",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_39yng",
+        "title": "Movimentação do Giro ABC",
+        "description": "",
+        "status": "andamento",
+        "priority": "alta",
+        "category": "produtividade",
+        "dueDate": "2026-06-19",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "andamento",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_ure50",
+        "title": "Revisar itens por localização, e revisar os códigos Rua 01",
+        "description": "",
+        "status": "andamento",
+        "priority": "alta",
+        "category": "produtividade",
+        "dueDate": "2026-06-30",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "andamento",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_qt0u7",
+        "title": "Baixar o sub-estoque diariamente",
+        "description": "",
+        "status": "andamento",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "2026-07-31",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "andamento",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_utcer",
+        "title": "Treinamento individual com Erica",
+        "description": "",
+        "status": "andamento",
+        "priority": "media",
+        "category": "feedbacks_individuais",
+        "dueDate": "2026-09-30",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "andamento",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_foie7",
+        "title": "Movimentação de itens com Giro ABC",
+        "description": "",
+        "status": "andamento",
+        "priority": "alta",
+        "category": "produtividade",
+        "dueDate": "2026-06-02",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "andamento",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_r1wkr",
+        "title": "Revisar itens por localização, e revisar os códigos Rua 16",
+        "description": "",
+        "status": "andamento",
+        "priority": "alta",
+        "category": "produtividade",
+        "dueDate": "2026-06-30",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "andamento",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_zrukn",
+        "title": "Novo formato de localização",
+        "description": "",
+        "status": "afazer",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "2026-06-02",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "afazer",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_1ja0f",
+        "title": "Reunião sobre Gestão Visual e organização com toda a equipe",
+        "description": "",
+        "status": "afazer",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "2026-06-30",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "afazer",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_f1d4e",
+        "title": "Projeto de colmeia para palhetas-Orçamento",
+        "description": "",
+        "status": "afazer",
+        "priority": "media",
+        "category": "gestao_visual",
+        "dueDate": "2026-06-30",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "afazer",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_6d80v",
+        "title": "Contagem de estoque dos blocos e ruas que já foram organizados",
+        "description": "",
+        "status": "afazer",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "afazer",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_fwdml",
+        "title": "Novo Layout da entrada de mercadoria",
+        "description": "",
+        "status": "afazer",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "2026-07-31",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "afazer",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_uynwf",
+        "title": "Projeto de colmeia para peças pequenas Giro B e C",
+        "description": "",
+        "status": "afazer",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "2026-06-02",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "afazer",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_cvccp",
+        "title": "Novo Layout do Check out",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_jgqhi",
+        "title": "Cadastro de localização do Sub Estoque",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_h1k47",
+        "title": "Métricas, indicadores da entrada de mercadoria",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_8w1wr",
+        "title": "Fluxo de armazenagem individual (Por Item)",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "processos",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_dzuqr",
+        "title": "Quadro de indicadores",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_jhgt7",
+        "title": "Quadro para expor processos",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "processos",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_f25gm",
+        "title": "Definir Layout de estoque, para alocação conforme tipo de PICKING",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "produtividade",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_9ugoa",
+        "title": "Mapeamento e desenho dos processos",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "processos",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.239Z"
+          }
+        ],
+        "attachments": []
+      },
+      {
+        "id": "t_mqr9qyr3_oyajh",
+        "title": "Feedback individual com todos da equipe",
+        "description": "",
+        "status": "backlog",
+        "priority": "media",
+        "category": "reunioes_equipe",
+        "dueDate": "",
+        "assignee": "",
+        "statusHistory": [
+          {
+            "status": "backlog",
+            "enteredAt": "2026-06-23T23:21:52.240Z"
+          }
+        ],
+        "attachments": []
+      }
+    ]
+  },
+  "categoriesByProject": {
+    "novo": []
+  },
+  "cyclesByProject": {
+    "novo": []
+  },
+  "wipLimitsByProject": {
+    "novo": {}
+  }
+}

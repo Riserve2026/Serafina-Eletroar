@@ -516,6 +516,28 @@ body[data-theme="dark"] .metric-fetch-btn:hover { background: #334155; }
 .cat-add-btn { background: transparent; border: 1px dashed #cbd5e1; color: #64748b; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 13px; font-family: inherit; margin-top: 4px; }
 .cat-add-btn:hover { border-color: #2563eb; color: #2563eb; }
 
+/* Fotos Antes / Depois */
+.photos-section { margin-bottom: 14px; }
+.photos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.photo-col { display: flex; flex-direction: column; gap: 6px; }
+.photo-col-header { font-size: 11px; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.antes-header { background: #fee2e2; color: #991b1b; }
+.depois-header { background: #d1fae5; color: #065f46; }
+.photo-thumbs { display: flex; flex-wrap: wrap; gap: 5px; min-height: 56px; padding: 4px; background: #f8fafc; border: 1px dashed #e2e8f0; border-radius: 6px; }
+.photo-thumb-wrap { position: relative; }
+.photo-thumb { width: 72px; height: 54px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s; display: block; }
+.photo-thumb:hover { border-color: #2563eb; }
+.photo-thumb-del { position: absolute; top: -5px; right: -5px; width: 16px; height: 16px; border-radius: 50%; background: #ef4444; color: white; border: none; cursor: pointer; font-size: 10px; line-height: 1; display: flex; align-items: center; justify-content: center; padding: 0; font-weight: 700; }
+.photo-thumb-del:hover { background: #b91c1c; }
+.photo-add-btn { background: white; border: 1px dashed #cbd5e1; color: #64748b; padding: 6px; border-radius: 6px; cursor: pointer; font-size: 11px; font-family: inherit; font-weight: 600; transition: all 0.15s; text-align: center; }
+.photo-add-btn:hover { border-color: #2563eb; color: #2563eb; background: #eff6ff; }
+.card-photos-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; color: #475569; background: #f1f5f9; border: 1px solid #e2e8f0; padding: 2px 6px; border-radius: 4px; margin-top: 5px; }
+body[data-theme="dark"] .photo-thumbs { background: #0f172a; border-color: #334155; }
+body[data-theme="dark"] .photo-add-btn { background: #1e293b; border-color: #475569; color: #94a3b8; }
+body[data-theme="dark"] .photo-add-btn:hover { border-color: #3b82f6; color: #93c5fd; background: #1e3a8a; }
+body[data-theme="dark-green"] .photo-thumbs { background: #042f2e; border-color: #1e6e68; }
+body[data-theme="dark-green"] .photo-add-btn { background: #134e4a; border-color: #2dd4bf; color: #6ee7b7; }
+
 /* Subtarefas */
 .subtasks-section { border-top: 1px solid #e5e7eb; padding-top: 12px; margin-top: 4px; }
 .subtasks-section > label { display: block; font-size: 12px; font-weight: 600; color: #334155; margin-bottom: 8px; }
@@ -953,15 +975,16 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <option value="dark-green">🌿 Escuro Verde</option>
     </select>
     <button class="btn btn-primary" onclick="openModal()">+ Nova Tarefa</button>
+    <button class="btn" onclick="openPeopleModal()">👥 Responsáveis</button>
     <button class="btn" onclick="openCategoryModal()">🏷️ Categorias</button>
     <button class="btn" onclick="openCycleModal()">📆 Ciclos</button>
     <button class="btn" onclick="exportReportHTML()">📄 Relatório HTML</button>
-    <button class="btn" id="fsBtn" onclick="fsConnect()" title="Conectar arquivo local para auto-save">💾 Auto-save</button>
-    <button class="btn" id="driveConfigBtn" onclick="openDriveConfigModal()" title="Configurar seletor do Google Drive">🔗 Drive</button>
+    <button class="btn" id="fsBtn" onclick="fsConnect()" title="Conectar arquivo local para auto-save" style="display:none">💾 Auto-save</button>
+    <button class="btn" id="driveConfigBtn" onclick="openDriveConfigModal()" title="Configurar seletor do Google Drive" style="display:none">🔗 Drive</button>
     <button class="btn" onclick="exportData()">Backup JSON</button>
     <button class="btn" onclick="document.getElementById('importFile').click()">Importar</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block; background: rgb(16, 185, 129);" disabled="">✅ Publicado!</button>
+    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block;">🌐 Publicar dados</button>
     <button class="btn" id="publishHtmlBtn" onclick="publishHTMLToGitHub()" title="Publicar o arquivo HTML completo como index.html no repositório" style="display: inline-block;" disabled="">⏳ Publicando HTML...</button>
     <button class="btn" id="ghConfigBtn" onclick="openGhConfigModal()" title="Configurar conexão com Vercel/GitHub" style="display: inline-block;">⚙️ Vercel</button>
   </div>
@@ -999,7 +1022,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
         <span class="column-count " onclick="editWipLimit('backlog')" title="Sem limite. Clique para definir limite WIP.">10</span>
       </div>
       <div class="cards" data-column="backlog"><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Novo Layout do Check out</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#23</span>Novo Layout do Check out</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1013,8 +1036,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Cadastro de localização do Sub Estoque</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#24</span>Cadastro de localização do Sub Estoque</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1028,8 +1053,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Métricas, indicadores da entrada de mercadoria</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#25</span>Métricas, indicadores da entrada de mercadoria</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1043,8 +1070,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Fluxo de armazenagem individual (Por Item)</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#26</span>Fluxo de armazenagem individual (Por Item)</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1058,8 +1087,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Quadro de indicadores</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#27</span>Quadro de indicadores</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1073,8 +1104,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Quadro para expor processos</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#28</span>Quadro para expor processos</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1088,8 +1121,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Definir Layout de estoque, para alocação conforme tipo de PICKING</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#29</span>Definir Layout de estoque, para alocação conforme tipo de PICKING</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1103,8 +1138,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Mapeamento e desenho dos processos</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#30</span>Mapeamento e desenho dos processos</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1118,8 +1155,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Feedback individual com todos da equipe</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#31</span>Feedback individual com todos da equipe</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1133,8 +1172,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">teste6666666666</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#32</span>teste6666666666</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1143,6 +1184,8 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       </div>
       
     </div>
+    
+    
     
     
     
@@ -1156,7 +1199,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
         <span class="column-count " onclick="editWipLimit('afazer')" title="Sem limite. Clique para definir limite WIP.">6</span>
       </div>
       <div class="cards" data-column="afazer"><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Novo formato de localização</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#17</span>Novo formato de localização</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1166,12 +1209,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date overdue">02/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Reunião sobre Gestão Visual e organização com toda a equipe</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#18</span>Reunião sobre Gestão Visual e organização com toda a equipe</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1181,12 +1226,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Projeto de colmeia para palhetas-Orçamento</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#19</span>Projeto de colmeia para palhetas-Orçamento</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1196,12 +1243,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Contagem de estoque dos blocos e ruas que já foram organizados</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#20</span>Contagem de estoque dos blocos e ruas que já foram organizados</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1211,12 +1260,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Novo Layout da entrada de mercadoria</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#21</span>Novo Layout da entrada de mercadoria</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1226,12 +1277,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date ">31/07</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Projeto de colmeia para peças pequenas Giro B e C</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#22</span>Projeto de colmeia para peças pequenas Giro B e C</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1241,7 +1294,9 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date overdue">02/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
@@ -1253,7 +1308,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
         <span class="column-count over-limit" onclick="editWipLimit('andamento')" title="Limite WIP: 3. Clique para alterar.">6 / 3</span>
       </div>
       <div class="cards" data-column="andamento"><div class="card card-priority-alta" draggable="true">
-    <div class="card-title">Movimentação do Giro ABC</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#11</span>Movimentação do Giro ABC</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1263,12 +1318,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date overdue">19/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-alta" draggable="true">
-    <div class="card-title">Revisar itens por localização, e revisar os códigos Rua 01</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#12</span>Revisar itens por localização, e revisar os códigos Rua 01</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1278,12 +1335,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Baixar o sub-estoque diariamente</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#13</span>Baixar o sub-estoque diariamente</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1293,12 +1352,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date ">31/07</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Treinamento individual com Erica</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#14</span>Treinamento individual com Erica</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1308,12 +1369,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date ">30/09</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-alta" draggable="true">
-    <div class="card-title">Movimentação de itens com Giro ABC</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#15</span>Movimentação de itens com Giro ABC</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1323,12 +1386,14 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date overdue">02/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
   </div><div class="card card-priority-alta" draggable="true">
-    <div class="card-title">Revisar itens por localização, e revisar os códigos Rua 16</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#16</span>Revisar itens por localização, e revisar os códigos Rua 16</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1338,7 +1403,9 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 1d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    
+    
     
     
     
@@ -1350,7 +1417,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
         <span class="column-count " onclick="editWipLimit('feito')" title="Sem limite. Clique para definir limite WIP.">10</span>
       </div>
       <div class="cards" data-column="feito"><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Organizar paletes de expedição</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#1</span>Organizar paletes de expedição</div>
     <div class="card-desc">Organização visual do ambiente na área de carga de mercadoria</div>
     <div class="card-meta">
       <div class="tags">
@@ -1364,8 +1431,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Demarcação da área de recebimento</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#2</span>Demarcação da área de recebimento</div>
     <div class="card-desc">Demarcar área de acomodação de mercadoria pós descarga</div>
     <div class="card-meta">
       <div class="tags">
@@ -1379,8 +1448,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Feedback com Mariana</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#3</span>Feedback com Mariana</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1394,8 +1465,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Feedback com Eduardo (Recebimento)</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#4</span>Feedback com Eduardo (Recebimento)</div>
     <div class="card-desc">Conversa para conhecer melhor o comportamento individual e orientar como será o andamento do projeto</div>
     <div class="card-meta">
       <div class="tags">
@@ -1409,8 +1482,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Feedback com Natam, novo líder do recebimento</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#5</span>Feedback com Natam, novo líder do recebimento</div>
     <div class="card-desc">Conversa de forma geral, sobre postura e desafios da nova posição de trabalho</div>
     <div class="card-meta">
       <div class="tags">
@@ -1424,8 +1499,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Organizar correias-Gates</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#6</span>Organizar correias-Gates</div>
     <div class="card-desc">Correias da Gates estão espalhadas pelo chão, no mezanino</div>
     <div class="card-meta">
       <div class="tags">
@@ -1439,8 +1516,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Reunião com a equipe</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#7</span>Reunião com a equipe</div>
     <div class="card-desc">Objetivo da reunião é conscientizar a equipe sobre a organização que está sendo feita no estoque. A reunião foi feita em…</div>
     <div class="card-meta">
       <div class="tags">
@@ -1454,8 +1533,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Emissão do relatório de Giro ABC</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#8</span>Emissão do relatório de Giro ABC</div>
     
     <div class="card-meta">
       <div class="tags">
@@ -1469,8 +1550,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Organização das palhetas</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#9</span>Organização das palhetas</div>
     <div class="card-desc">Palhetas estão todas misturadas e desorganizadas, organização prévia das palhetas de vetor aproveitando o momento de fol…</div>
     <div class="card-meta">
       <div class="tags">
@@ -1484,8 +1567,10 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     
     
+    
+    
   </div><div class="card card-priority-media" draggable="true">
-    <div class="card-title">Colocado a impressora de etiquetas da São Miguel, na expedição</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#10</span>Colocado a impressora de etiquetas da São Miguel, na expedição</div>
     <div class="card-desc">Impressora estava na mesa do Bernardo</div>
     <div class="card-meta">
       <div class="tags">
@@ -1494,6 +1579,8 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       </div>
       
     </div>
+    
+    
     
     
     
@@ -1681,6 +1768,29 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
   </div>
 </div>
 
+<!-- Modal Responsáveis -->
+<div class="modal-overlay" id="peopleModal" onclick="if(event.target===this)closePeopleModal()">
+  <div class="modal" style="max-width:520px">
+    <h2>👥 Cadastro de Responsáveis</h2>
+    <p style="font-size:12px;color:#64748b;margin-bottom:14px">Cadastro global — os responsáveis ficam disponíveis em todos os projetos e cards.</p>
+    <div id="peopleList" class="cat-list"></div>
+    <div style="border-top:1px solid #e5e7eb;margin-top:12px;padding-top:12px">
+      <div style="font-size:11px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Novo Responsável</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px">
+        <input type="text" id="newPersonName" placeholder="Nome *" style="border:1px solid #d1d5db;padding:7px 9px;border-radius:6px;font-size:13px;font-family:inherit" onkeydown="if(event.key==='Enter')addPersonFromModal()">
+        <input type="text" id="newPersonRole" placeholder="Função" style="border:1px solid #d1d5db;padding:7px 9px;border-radius:6px;font-size:13px;font-family:inherit" onkeydown="if(event.key==='Enter')addPersonFromModal()">
+        <input type="text" id="newPersonSector" placeholder="Setor" style="border:1px solid #d1d5db;padding:7px 9px;border-radius:6px;font-size:13px;font-family:inherit" onkeydown="if(event.key==='Enter')addPersonFromModal()">
+      </div>
+      <button class="btn btn-primary" onclick="addPersonFromModal()" style="width:100%">+ Adicionar responsável</button>
+    </div>
+    <div class="modal-actions">
+      <div class="right" style="margin-left:auto">
+        <button class="btn btn-primary" onclick="closePeopleModal()">Concluído</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Modal Categorias -->
 <div class="modal-overlay" id="catModal" onclick="if(event.target===this)closeCategoryModal()">
   <div class="modal">
@@ -1699,8 +1809,8 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
 <!-- Modal -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
-    <h2 id="modalTitle">Editar Tarefa</h2>
-    <input type="hidden" id="taskId" value="t_mqr9qyr3_cvccp">
+    <h2 id="modalTitle">Nova Tarefa</h2>
+    <input type="hidden" id="taskId">
     <div class="form-group">
       <label>O que fazer? *</label>
       <input type="text" id="title" placeholder="Ex: Mapear fluxo do recebimento de mercadorias">
@@ -1746,20 +1856,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <label>Responsável</label>
       <div style="display:flex;gap:6px;align-items:center">
         <select id="assignee" style="flex:1"><option value="">— Sem responsável —</option></select>
-        <button type="button" class="btn-icon" onclick="togglePersonForm()" title="Cadastrar novo responsável" id="addPersonBtn">+</button>
-        <button type="button" class="btn-icon btn-icon-danger" onclick="quickDeletePerson()" title="Remover responsável do cadastro">🗑</button>
-      </div>
-      <!-- Formulário inline de cadastro de responsável -->
-      <div id="personForm" style="display:none;margin-top:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px">
-        <div style="font-size:11px;font-weight:700;color:#475569;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Novo Responsável</div>
-        <div style="display:flex;gap:6px;margin-bottom:6px">
-          <input type="text" id="personName" placeholder="Nome *" style="flex:2;padding:6px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;font-family:inherit" onkeydown="if(event.key==='Enter'){event.preventDefault();confirmAddPerson();}">
-          <input type="text" id="personRole" placeholder="Função (opcional)" style="flex:3;padding:6px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;font-family:inherit" onkeydown="if(event.key==='Enter'){event.preventDefault();confirmAddPerson();}">
-        </div>
-        <div style="display:flex;gap:6px;justify-content:flex-end">
-          <button type="button" onclick="togglePersonForm()" style="padding:5px 12px;border:1px solid #d1d5db;border-radius:6px;background:white;font-size:12px;cursor:pointer;font-family:inherit">Cancelar</button>
-          <button type="button" onclick="confirmAddPerson()" style="padding:5px 12px;border:none;border-radius:6px;background:#2563eb;color:white;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600">✓ Confirmar</button>
-        </div>
+        <button type="button" class="btn-icon" onclick="openPeopleModal()" title="Gerenciar cadastro de responsáveis">👥</button>
       </div>
     </div>
 
@@ -1770,18 +1867,35 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
 
     <div class="form-group attachments-section">
       <label>📎 Anexos / Links</label>
-      <div class="attachments-list" id="attachmentsList"><div style="font-size:11px;color:#94a3b8;font-style:italic;padding:4px 2px">Nenhum anexo. Use o campo abaixo para adicionar links.</div></div>
+      <div class="attachments-list" id="attachmentsList"></div>
       <div class="attachment-add">
         <input type="url" id="newAttachUrl" placeholder="Cole URL (planilha, doc, drive, link...)" onkeydown="if(event.key==='Enter'){event.preventDefault();addAttachment();}">
         <button type="button" onclick="addAttachment()">+ Adicionar</button>
       </div>
-      <button type="button" onclick="openDrivePickerForAttachment()" style="margin-top:6px;width:100%;background:#f0fdf4;border:1px solid #6ee7b7;color:#047857;padding:7px 12px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:6px" onmouseover="this.style.background='#dcfce7'" onmouseout="this.style.background='#f0fdf4'">📂 Buscar arquivo no Google Drive</button>
       <div style="font-size:10px;color:#94a3b8;margin-top:4px">Planilha, POP, evidência, link externo — quantos quiser. O ícone se ajusta automaticamente ao tipo.</div>
+    </div>
+
+    <div class="photos-section">
+      <label style="display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:8px">📸 Fotos Antes / Depois</label>
+      <div class="photos-grid">
+        <div class="photo-col">
+          <div class="photo-col-header antes-header">📷 Antes</div>
+          <div class="photo-thumbs" id="photoThumbsAntes"></div>
+          <button type="button" class="photo-add-btn" onclick="document.getElementById('photoInputAntes').click()">+ Adicionar foto</button>
+          <input type="file" id="photoInputAntes" accept="image/*" multiple="" style="display:none" onchange="handlePhotoUpload('antes',this)">
+        </div>
+        <div class="photo-col">
+          <div class="photo-col-header depois-header">✨ Depois</div>
+          <div class="photo-thumbs" id="photoThumbsDepois"></div>
+          <button type="button" class="photo-add-btn" onclick="document.getElementById('photoInputDepois').click()">+ Adicionar foto</button>
+          <input type="file" id="photoInputDepois" accept="image/*" multiple="" style="display:none" onchange="handlePhotoUpload('depois',this)">
+        </div>
+      </div>
     </div>
 
     <div class="subtasks-section">
       <label>📋 Subtarefas</label>
-      <div class="subtasks-list" id="subtasksList"><div style="font-size:11px;color:#94a3b8;font-style:italic;padding:4px 2px">Nenhuma subtarefa. Use o campo abaixo para adicionar.</div></div>
+      <div class="subtasks-list" id="subtasksList"></div>
       <div class="subtask-add">
         <input type="text" id="newSubtask" placeholder="Adicionar subtarefa..." onkeydown="if(event.key==='Enter'){event.preventDefault();addSubtask();}">
         <button type="button" onclick="addSubtask()">+ Add</button>
@@ -1793,161 +1907,29 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="metrics-grid-header">
         <span>Indicador</span><span>Antes</span><span>Agora</span><span>Unidade</span>
       </div>
-      <div id="metricsGrid"><div class="metric-row">
-      <div class="metric-row-label">
-        <span>⏱ Tempo médio</span>
-        <select class="metric-process-select" onchange="modalMetrics['tempo_medio'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
-      </div>
-      <input type="number" id="metric_before_tempo_medio" step="0.01" placeholder="—" value="" oninput="modalMetrics['tempo_medio'].before=this.value">
-      <input type="number" id="metric_after_tempo_medio" step="0.01" placeholder="—" value="" oninput="modalMetrics['tempo_medio'].after=this.value">
-      <input type="text" placeholder="min" value="min" oninput="modalMetrics['tempo_medio'].unit=this.value" style="text-align:center">
-    </div>
-    <div class="metric-link-row">
-      <input type="url" id="metric_link_tempo_medio" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['tempo_medio'].link=this.value; updateMetricLinkBtn('tempo_medio'); checkSheetBtn('tempo_medio')" onpaste="setTimeout(()=&gt;{modalMetrics['tempo_medio'].link=this.value;updateMetricLinkBtn('tempo_medio');checkSheetBtn('tempo_medio');},50)">
-      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('tempo_medio')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
-      <button type="button" id="metric_paste_tempo_medio" class="metric-paste-btn" onclick="pasteMetricLink('tempo_medio')" title="Colar link copiado">📋</button>
-      <button type="button" id="metric_sync_tempo_medio" class="metric-sync-btn " onclick="toggleSheetConfig('tempo_medio')" title="Configurar leitura da planilha">🔄</button>
-      <button type="button" id="metric_link_btn_tempo_medio" class="metric-link-open " title="Abrir link" onclick="openMetricLink('tempo_medio')">↗</button>
-    </div>
-    <div class="metric-sheet-config" id="metric_sheet_cfg_tempo_medio">
-      <label>Aba:</label>
-      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['tempo_medio'].sheetConfig.sheetName=this.value">
-      <label>Antes:</label>
-      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['tempo_medio'].sheetConfig.cellAntes=this.value">
-      <label>Agora:</label>
-      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['tempo_medio'].sheetConfig.cellAgora=this.value">
-      <button type="button" id="metric_fetch_tempo_medio" class="metric-fetch-btn" onclick="fetchSheetData('tempo_medio')">⬇ Buscar</button>
-    </div><div class="metric-row">
-      <div class="metric-row-label">
-        <span>📐 Ganho de espaço</span>
-        <select class="metric-process-select" onchange="modalMetrics['ganho_espaco'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
-      </div>
-      <input type="number" id="metric_before_ganho_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['ganho_espaco'].before=this.value">
-      <input type="number" id="metric_after_ganho_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['ganho_espaco'].after=this.value">
-      <input type="text" placeholder="m²" value="m²" oninput="modalMetrics['ganho_espaco'].unit=this.value" style="text-align:center">
-    </div>
-    <div class="metric-link-row">
-      <input type="url" id="metric_link_ganho_espaco" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['ganho_espaco'].link=this.value; updateMetricLinkBtn('ganho_espaco'); checkSheetBtn('ganho_espaco')" onpaste="setTimeout(()=&gt;{modalMetrics['ganho_espaco'].link=this.value;updateMetricLinkBtn('ganho_espaco');checkSheetBtn('ganho_espaco');},50)">
-      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('ganho_espaco')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
-      <button type="button" id="metric_paste_ganho_espaco" class="metric-paste-btn" onclick="pasteMetricLink('ganho_espaco')" title="Colar link copiado">📋</button>
-      <button type="button" id="metric_sync_ganho_espaco" class="metric-sync-btn " onclick="toggleSheetConfig('ganho_espaco')" title="Configurar leitura da planilha">🔄</button>
-      <button type="button" id="metric_link_btn_ganho_espaco" class="metric-link-open " title="Abrir link" onclick="openMetricLink('ganho_espaco')">↗</button>
-    </div>
-    <div class="metric-sheet-config" id="metric_sheet_cfg_ganho_espaco">
-      <label>Aba:</label>
-      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['ganho_espaco'].sheetConfig.sheetName=this.value">
-      <label>Antes:</label>
-      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['ganho_espaco'].sheetConfig.cellAntes=this.value">
-      <label>Agora:</label>
-      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['ganho_espaco'].sheetConfig.cellAgora=this.value">
-      <button type="button" id="metric_fetch_ganho_espaco" class="metric-fetch-btn" onclick="fetchSheetData('ganho_espaco')">⬇ Buscar</button>
-    </div><div class="metric-row">
-      <div class="metric-row-label">
-        <span>📦 Itens por espaço</span>
-        <select class="metric-process-select" onchange="modalMetrics['capacidade_espaco'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
-      </div>
-      <input type="number" id="metric_before_capacidade_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['capacidade_espaco'].before=this.value">
-      <input type="number" id="metric_after_capacidade_espaco" step="0.01" placeholder="—" value="" oninput="modalMetrics['capacidade_espaco'].after=this.value">
-      <input type="text" placeholder="itens" value="itens" oninput="modalMetrics['capacidade_espaco'].unit=this.value" style="text-align:center">
-    </div>
-    <div class="metric-link-row">
-      <input type="url" id="metric_link_capacidade_espaco" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['capacidade_espaco'].link=this.value; updateMetricLinkBtn('capacidade_espaco'); checkSheetBtn('capacidade_espaco')" onpaste="setTimeout(()=&gt;{modalMetrics['capacidade_espaco'].link=this.value;updateMetricLinkBtn('capacidade_espaco');checkSheetBtn('capacidade_espaco');},50)">
-      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('capacidade_espaco')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
-      <button type="button" id="metric_paste_capacidade_espaco" class="metric-paste-btn" onclick="pasteMetricLink('capacidade_espaco')" title="Colar link copiado">📋</button>
-      <button type="button" id="metric_sync_capacidade_espaco" class="metric-sync-btn " onclick="toggleSheetConfig('capacidade_espaco')" title="Configurar leitura da planilha">🔄</button>
-      <button type="button" id="metric_link_btn_capacidade_espaco" class="metric-link-open " title="Abrir link" onclick="openMetricLink('capacidade_espaco')">↗</button>
-    </div>
-    <div class="metric-sheet-config" id="metric_sheet_cfg_capacidade_espaco">
-      <label>Aba:</label>
-      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['capacidade_espaco'].sheetConfig.sheetName=this.value">
-      <label>Antes:</label>
-      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['capacidade_espaco'].sheetConfig.cellAntes=this.value">
-      <label>Agora:</label>
-      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['capacidade_espaco'].sheetConfig.cellAgora=this.value">
-      <button type="button" id="metric_fetch_capacidade_espaco" class="metric-fetch-btn" onclick="fetchSheetData('capacidade_espaco')">⬇ Buscar</button>
-    </div><div class="metric-row">
-      <div class="metric-row-label">
-        <span>🚶 Percurso</span>
-        <select class="metric-process-select" onchange="modalMetrics['percurso'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
-      </div>
-      <input type="number" id="metric_before_percurso" step="0.01" placeholder="—" value="" oninput="modalMetrics['percurso'].before=this.value">
-      <input type="number" id="metric_after_percurso" step="0.01" placeholder="—" value="" oninput="modalMetrics['percurso'].after=this.value">
-      <input type="text" placeholder="m" value="m" oninput="modalMetrics['percurso'].unit=this.value" style="text-align:center">
-    </div>
-    <div class="metric-link-row">
-      <input type="url" id="metric_link_percurso" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['percurso'].link=this.value; updateMetricLinkBtn('percurso'); checkSheetBtn('percurso')" onpaste="setTimeout(()=&gt;{modalMetrics['percurso'].link=this.value;updateMetricLinkBtn('percurso');checkSheetBtn('percurso');},50)">
-      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('percurso')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
-      <button type="button" id="metric_paste_percurso" class="metric-paste-btn" onclick="pasteMetricLink('percurso')" title="Colar link copiado">📋</button>
-      <button type="button" id="metric_sync_percurso" class="metric-sync-btn " onclick="toggleSheetConfig('percurso')" title="Configurar leitura da planilha">🔄</button>
-      <button type="button" id="metric_link_btn_percurso" class="metric-link-open " title="Abrir link" onclick="openMetricLink('percurso')">↗</button>
-    </div>
-    <div class="metric-sheet-config" id="metric_sheet_cfg_percurso">
-      <label>Aba:</label>
-      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['percurso'].sheetConfig.sheetName=this.value">
-      <label>Antes:</label>
-      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['percurso'].sheetConfig.cellAntes=this.value">
-      <label>Agora:</label>
-      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['percurso'].sheetConfig.cellAgora=this.value">
-      <button type="button" id="metric_fetch_percurso" class="metric-fetch-btn" onclick="fetchSheetData('percurso')">⬇ Buscar</button>
-    </div><div class="metric-row">
-      <div class="metric-row-label">
-        <span>⚠️ Não-Conformidades</span>
-        <select class="metric-process-select" onchange="modalMetrics['nao_conformidades'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
-      </div>
-      <input type="number" id="metric_before_nao_conformidades" step="0.01" placeholder="—" value="" oninput="modalMetrics['nao_conformidades'].before=this.value">
-      <input type="number" id="metric_after_nao_conformidades" step="0.01" placeholder="—" value="" oninput="modalMetrics['nao_conformidades'].after=this.value">
-      <input type="text" placeholder="un" value="un" oninput="modalMetrics['nao_conformidades'].unit=this.value" style="text-align:center">
-    </div>
-    <div class="metric-link-row">
-      <input type="url" id="metric_link_nao_conformidades" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['nao_conformidades'].link=this.value; updateMetricLinkBtn('nao_conformidades'); checkSheetBtn('nao_conformidades')" onpaste="setTimeout(()=&gt;{modalMetrics['nao_conformidades'].link=this.value;updateMetricLinkBtn('nao_conformidades');checkSheetBtn('nao_conformidades');},50)">
-      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('nao_conformidades')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
-      <button type="button" id="metric_paste_nao_conformidades" class="metric-paste-btn" onclick="pasteMetricLink('nao_conformidades')" title="Colar link copiado">📋</button>
-      <button type="button" id="metric_sync_nao_conformidades" class="metric-sync-btn " onclick="toggleSheetConfig('nao_conformidades')" title="Configurar leitura da planilha">🔄</button>
-      <button type="button" id="metric_link_btn_nao_conformidades" class="metric-link-open " title="Abrir link" onclick="openMetricLink('nao_conformidades')">↗</button>
-    </div>
-    <div class="metric-sheet-config" id="metric_sheet_cfg_nao_conformidades">
-      <label>Aba:</label>
-      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['nao_conformidades'].sheetConfig.sheetName=this.value">
-      <label>Antes:</label>
-      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['nao_conformidades'].sheetConfig.cellAntes=this.value">
-      <label>Agora:</label>
-      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['nao_conformidades'].sheetConfig.cellAgora=this.value">
-      <button type="button" id="metric_fetch_nao_conformidades" class="metric-fetch-btn" onclick="fetchSheetData('nao_conformidades')">⬇ Buscar</button>
-    </div><div class="metric-row">
-      <div class="metric-row-label">
-        <span>💰 Resultado financeiro</span>
-        <select class="metric-process-select" onchange="modalMetrics['resultado_financeiro'].process=this.value" title="Processo onde o ganho foi medido"><option value="" selected="">— Processo —</option><option value="Separação">Separação</option><option value="Armazenagem">Armazenagem</option><option value="Checking">Checking</option><option value="Checkout">Checkout</option><option value="Recebimento">Recebimento</option><option value="Expedição">Expedição</option><option value="Outro">Outro</option></select>
-      </div>
-      <input type="number" id="metric_before_resultado_financeiro" step="0.01" placeholder="—" value="" oninput="modalMetrics['resultado_financeiro'].before=this.value">
-      <input type="number" id="metric_after_resultado_financeiro" step="0.01" placeholder="—" value="" oninput="modalMetrics['resultado_financeiro'].after=this.value">
-      <input type="text" placeholder="R$" value="R$" oninput="modalMetrics['resultado_financeiro'].unit=this.value" style="text-align:center">
-    </div>
-    <div class="metric-link-row">
-      <input type="url" id="metric_link_resultado_financeiro" placeholder="Cole o link aqui..." value="" oninput="modalMetrics['resultado_financeiro'].link=this.value; updateMetricLinkBtn('resultado_financeiro'); checkSheetBtn('resultado_financeiro')" onpaste="setTimeout(()=&gt;{modalMetrics['resultado_financeiro'].link=this.value;updateMetricLinkBtn('resultado_financeiro');checkSheetBtn('resultado_financeiro');},50)">
-      <button type="button" class="metric-drive-btn" onclick="openDriveAndWatchPaste('resultado_financeiro')" title="Abrir Google Drive — copie o link e volte aqui">📂 Drive</button>
-      <button type="button" id="metric_paste_resultado_financeiro" class="metric-paste-btn" onclick="pasteMetricLink('resultado_financeiro')" title="Colar link copiado">📋</button>
-      <button type="button" id="metric_sync_resultado_financeiro" class="metric-sync-btn " onclick="toggleSheetConfig('resultado_financeiro')" title="Configurar leitura da planilha">🔄</button>
-      <button type="button" id="metric_link_btn_resultado_financeiro" class="metric-link-open " title="Abrir link" onclick="openMetricLink('resultado_financeiro')">↗</button>
-    </div>
-    <div class="metric-sheet-config" id="metric_sheet_cfg_resultado_financeiro">
-      <label>Aba:</label>
-      <input class="sheet-name" type="text" placeholder="Nome da aba (vazio = 1ª aba)" value="" oninput="modalMetrics['resultado_financeiro'].sheetConfig.sheetName=this.value">
-      <label>Antes:</label>
-      <input class="cell-ref" type="text" placeholder="B2" value="B2" oninput="modalMetrics['resultado_financeiro'].sheetConfig.cellAntes=this.value">
-      <label>Agora:</label>
-      <input class="cell-ref" type="text" placeholder="C2" value="C2" oninput="modalMetrics['resultado_financeiro'].sheetConfig.cellAgora=this.value">
-      <button type="button" id="metric_fetch_resultado_financeiro" class="metric-fetch-btn" onclick="fetchSheetData('resultado_financeiro')">⬇ Buscar</button>
-    </div></div>
+      <div id="metricsGrid"></div>
     </div>
     <div style="font-size:10px;color:#94a3b8;margin-top:6px">Preencha "Antes" e "Agora" para calcular o ganho automaticamente. Deixe em branco os que não se aplicam.</div>
 
+    <!-- Feedbacks Positivos -->
+    <div class="section-divider" style="margin-top:14px">💬 Feedbacks Positivos</div>
+    <div id="positiveFeedbacksList" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px"></div>
+    <div style="display:grid;grid-template-columns:160px 1fr auto;gap:6px;align-items:start">
+      <select id="fbCategorySelect" style="border:1px solid #d1d5db;padding:6px 8px;border-radius:6px;font-size:12px;font-family:inherit;background:white">
+        <option value="">— Categoria —</option>
+      </select>
+      <textarea id="fbText" rows="2" placeholder="Descreva o feedback ou resultado comportamental observado..." style="border:1px solid #d1d5db;padding:6px 8px;border-radius:6px;font-size:12px;font-family:inherit;resize:vertical;min-height:36px"></textarea>
+      <button type="button" onclick="addPositiveFeedback()" style="padding:6px 12px;border:none;border-radius:6px;background:#059669;color:white;font-size:12px;cursor:pointer;font-family:inherit;font-weight:600;white-space:nowrap;height:36px">+ Add</button>
+    </div>
+    <div style="font-size:10px;color:#94a3b8;margin-top:4px">Registre resultados qualitativos: treinamento de líderes, mudanças comportamentais, engajamento da equipe, etc.</div>
+
     <div class="modal-actions">
-      <button class="btn btn-danger" id="deleteBtn" onclick="deleteTask()" style="display: inline-block;">Excluir</button>
-      <button class="btn" id="archiveBtn" onclick="archiveTask()" style="display: inline-block; background: rgb(241, 245, 249); border-color: rgb(203, 213, 225); color: rgb(71, 85, 105);" title="Arquivar card — teve andamento mas não será concluído">🗂️ Arquivar</button>
+      <button class="btn btn-danger" id="deleteBtn" onclick="deleteTask()" style="display:none">Excluir</button>
+      <button class="btn" id="archiveBtn" onclick="archiveTask()" style="display:none;background:#f1f5f9;border-color:#cbd5e1;color:#475569" title="Arquivar card — teve andamento mas não será concluído">🗂️ Arquivar</button>
       <button class="btn btn-primary" id="restoreBtn" onclick="restoreTask()" style="display:none">↩️ Restaurar</button>
       <div class="right" style="margin-left:auto">
         <button class="btn" onclick="closeModal()">Cancelar</button>
-        <button class="btn btn-primary" id="saveTaskBtn" onclick="saveTask()" style="display: inline-block;">Salvar</button>
+        <button class="btn btn-primary" id="saveTaskBtn" onclick="saveTask()">Salvar</button>
       </div>
     </div>
   </div>
@@ -2016,7 +1998,7 @@ let activeProjectId = getActiveProjectId();
 
 function STORAGE_KEY_FN() { return 'kanban2_tasks_' + activeProjectId; }
 function CAT_STORAGE_KEY_FN() { return 'kanban2_categories_' + activeProjectId; }
-function PEOPLE_KEY_FN() { return 'kanban2_people_' + activeProjectId; }
+function PEOPLE_KEY_FN() { return 'kanban2_people_global_v1'; }
 // Constants kept as getters for backward references
 Object.defineProperty(window, 'STORAGE_KEY', { get: STORAGE_KEY_FN });
 Object.defineProperty(window, 'CAT_STORAGE_KEY', { get: CAT_STORAGE_KEY_FN });
@@ -2063,6 +2045,31 @@ function saveCategories() {
 }
 
 let categories = loadCategories();
+
+// Migra pessoas de cadastros por projeto para global (executa uma vez)
+(function migratePeopleToGlobal() {
+  const globalKey = 'kanban2_people_global_v1';
+  const migratedKey = 'kanban2_people_migrated_v1';
+  if (localStorage.getItem(migratedKey)) return;
+  const globalRaw = localStorage.getItem(globalKey);
+  let global = globalRaw ? JSON.parse(globalRaw) : [];
+  const names = new Set(global.map(p => p.name.toLowerCase()));
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (!k || !k.startsWith('kanban2_people_') || k === globalKey) continue;
+    try {
+      const arr = JSON.parse(localStorage.getItem(k) || '[]');
+      arr.forEach(p => {
+        if (p.name && !names.has(p.name.toLowerCase())) {
+          global.push({ id: 'per_' + Date.now().toString(36) + Math.random().toString(36).slice(2,5), name: p.name, role: p.role||'', sector: p.sector||'' });
+          names.add(p.name.toLowerCase());
+        }
+      });
+    } catch(e) {}
+  }
+  if (global.length) localStorage.setItem(globalKey, JSON.stringify(global));
+  localStorage.setItem(migratedKey, '1');
+})();
 
 // ── Responsáveis ──
 function loadPeople() {
@@ -2182,6 +2189,22 @@ tasks.forEach(t => {
   }
   if (!Array.isArray(t.attachments)) t.attachments = [];
 });
+// Migração: atribuir seq para tasks que ainda não têm
+(function migrateSeq() {
+  const key = 'kanban2_seq_' + activeProjectId;
+  let maxSeq = parseInt(localStorage.getItem(key) || '0');
+  let changed = false;
+  tasks.forEach(t => {
+    if (!t.seq) {
+      maxSeq++;
+      t.seq = maxSeq;
+      changed = true;
+    } else {
+      if (t.seq > maxSeq) maxSeq = t.seq;
+    }
+  });
+  if (changed) { localStorage.setItem(key, maxSeq); migrated = true; }
+})();
 // Auto-salvar imediatamente se localStorage estava vazio (garante persistência dos defaults)
 if (migrated || _storagePreviouslyEmpty) saveTasks();
 
@@ -2257,6 +2280,13 @@ function saveTasks() {
     existing[activeProjectId] = { tasks: tasks, savedAt: Date.now() };
     localStorage.setItem(emergencyKey, JSON.stringify(existing));
   } catch(e) {}
+}
+
+function getNextSeq() {
+  const key = 'kanban2_seq_' + activeProjectId;
+  const n = parseInt(localStorage.getItem(key) || '0') + 1;
+  localStorage.setItem(key, n);
+  return n;
 }
 
 function id() {
@@ -2438,7 +2468,7 @@ function buildCard(t, isArchived = false) {
   const dateStr = t.dueDate ? formatDate(t.dueDate) : '';
 
   card.innerHTML = `
-    <div class="card-title">${escapeHtml(t.title)}</div>
+    <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#${t.seq||'?'}</span>${escapeHtml(t.title)}</div>
     ${t.description ? `<div class="card-desc">${escapeHtml(t.description.length > 120 ? t.description.slice(0,120)+'…' : t.description)}</div>` : ''}
     <div class="card-meta">
       <div class="tags">
@@ -2450,8 +2480,10 @@ function buildCard(t, isArchived = false) {
     ${t.assignee ? `<div style="font-size:11px;color:#64748b;margin-top:6px">${escapeHtml(t.assignee)}</div>` : ''}
     ${isArchived ? '<div class="archive-badge">🗂️ Arquivado</div>' : renderCycleAndTime(t)}
     ${isArchived ? '' : renderDriveLink(t)}
+    ${renderCardPhotoBadge(t)}
     ${isArchived ? '' : renderSubtaskProgress(t)}
     ${isArchived ? '' : renderGainBadge(t)}
+    ${(t.positiveFeedbacks && t.positiveFeedbacks.length > 0) ? `<div style="font-size:10px;color:#059669;margin-top:4px;font-weight:600">💬 ${t.positiveFeedbacks.length} feedback${t.positiveFeedbacks.length>1?'s':''} positivo${t.positiveFeedbacks.length>1?'s':''}</div>` : ''}
   `;
   return card;
 }
@@ -2569,7 +2601,7 @@ function renderGainBadge(t) {
       const color = g.isImprovement ? '#047857' : (g.delta === 0 ? '#64748b' : '#991b1b');
       const linkHtml = g.link ? ` <a href="${escapeHtml(g.link)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:#2563eb;font-size:10px;text-decoration:none;flex-shrink:0" title="Abrir planilha/evidência">↗</a>` : '';
       html += `<div style="display:flex;justify-content:space-between;align-items:center;gap:6px">
-        <div class="gain-detail" style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.icon||'📊'} ${escapeHtml(g.label)}: ${fmt(g.before)}→${fmt(g.after)} ${escapeHtml(g.unit)}${linkHtml}</div>
+        <div class="gain-detail" style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.icon||'📊'} ${escapeHtml(g.label)}${g.process ? ` · <b>${escapeHtml(g.process)}</b>` : ''}: ${fmt(g.before)}→${fmt(g.after)} ${escapeHtml(g.unit)}${linkHtml}</div>
         <div class="gain-value" style="color:${color};flex-shrink:0">${arrow}${pctAbs}%</div>
       </div>`;
     });
@@ -2605,7 +2637,7 @@ function formatDate(s) {
 function openModal(taskId, defaultStatus) {
   const modal = document.getElementById('modal');
   const t = taskId ? tasks.find(x => x.id === taskId) : null;
-  document.getElementById('modalTitle').textContent = t ? 'Editar Tarefa' : 'Nova Tarefa';
+  document.getElementById('modalTitle').textContent = t ? `Editar Tarefa #${t.seq||'?'}` : 'Nova Tarefa';
   document.getElementById('taskId').value = t ? t.id : '';
   document.getElementById('title').value = t ? t.title : '';
   document.getElementById('description').value = t ? (t.description||'') : '';
@@ -2623,6 +2655,9 @@ function openModal(taskId, defaultStatus) {
   renderAttachmentsInModal();
   document.getElementById('newAttachUrl').value = '';
   renderMetricsGrid(t ? (t.metrics || {}) : {});
+  initPositiveFeedbacks(t ? (t.positiveFeedbacks || []) : []);
+  modalPhotos = { antes: t?.photos?.antes ? [...t.photos.antes] : [], depois: t?.photos?.depois ? [...t.photos.depois] : [] };
+  renderModalPhotos();
   modalSubtasks = t && Array.isArray(t.subtasks) ? JSON.parse(JSON.stringify(t.subtasks)) : [];
   modalTaskStatus = t ? t.status : (defaultStatus || 'backlog');
   renderSubtasks();
@@ -2657,7 +2692,9 @@ function saveTask() {
     assignee: document.getElementById('assignee').value.trim(),
     cycleId: document.getElementById('cycleSelect').value || null,
     attachments: modalAttachments.filter(a => a.url && a.url.trim()).map(a => ({ id: a.id, url: a.url.trim(), label: (a.label||'').trim() })),
-    metrics: Object.fromEntries(PREDEFINED_METRICS.map(pm => [pm.id, { before: modalMetrics[pm.id]?.before ?? '', after: modalMetrics[pm.id]?.after ?? '', unit: modalMetrics[pm.id]?.unit || pm.defaultUnit, link: (modalMetrics[pm.id]?.link || '').trim(), sheetConfig: modalMetrics[pm.id]?.sheetConfig || null }])),
+    metrics: Object.fromEntries(PREDEFINED_METRICS.map(pm => [pm.id, { before: modalMetrics[pm.id]?.before ?? '', after: modalMetrics[pm.id]?.after ?? '', unit: modalMetrics[pm.id]?.unit || pm.defaultUnit, link: (modalMetrics[pm.id]?.link || '').trim(), process: modalMetrics[pm.id]?.process || '', sheetConfig: modalMetrics[pm.id]?.sheetConfig || null }])),
+    positiveFeedbacks: modalPositiveFeedbacks.filter(f => f.text && f.text.trim()).map(f => ({ id: f.id, category: f.category, text: f.text.trim() })),
+    photos: { antes: modalPhotos.antes, depois: modalPhotos.depois },
     subtasks: modalSubtasks.filter(st => st.title && st.title.trim()).map(st => ({ id: st.id, title: st.title.trim(), done: !!st.done }))
   };
   if (taskId) {
@@ -2671,7 +2708,7 @@ function saveTask() {
       }
     }
   } else {
-    const newTask = { id: id(), ...data };
+    const newTask = { id: id(), seq: getNextSeq(), ...data };
     newTask.statusHistory = [{ status: data.status, enteredAt: new Date().toISOString() }];
     tasks.push(newTask);
   }
@@ -3598,59 +3635,88 @@ function rebuildPeopleDropdown() {
   if (!sel) return;
   const current = sel.value;
   sel.innerHTML = '<option value="">— Sem responsável —</option>' +
-    people.map(p => `<option value="${escapeHtml(p.name)}">${escapeHtml(p.name)}${p.role ? ' — ' + escapeHtml(p.role) : ''}</option>`).join('');
-  // Tenta restaurar seleção; se não existir no cadastro, mantém como valor livre
+    people.map(p => {
+      const detail = [p.role, p.sector].filter(Boolean).join(' · ');
+      return `<option value="${escapeHtml(p.name)}">${escapeHtml(p.name)}${detail ? ' — ' + escapeHtml(detail) : ''}</option>`;
+    }).join('');
   sel.value = current;
 }
 
-function togglePersonForm() {
-  const form = document.getElementById('personForm');
-  const isOpen = form.style.display !== 'none';
-  form.style.display = isOpen ? 'none' : 'block';
-  if (!isOpen) {
-    document.getElementById('personName').value = '';
-    document.getElementById('personRole').value = '';
-    setTimeout(() => document.getElementById('personName').focus(), 50);
-  }
+function openPeopleModal() {
+  renderPeopleList();
+  document.getElementById('newPersonName').value = '';
+  document.getElementById('newPersonRole').value = '';
+  document.getElementById('newPersonSector').value = '';
+  document.getElementById('peopleModal').classList.add('active');
 }
 
-function confirmAddPerson() {
-  const nameEl = document.getElementById('personName');
-  const roleEl = document.getElementById('personRole');
-  const trimmed = (nameEl.value || '').trim();
-  if (!trimmed) { nameEl.style.borderColor = '#ef4444'; nameEl.focus(); return; }
-  nameEl.style.borderColor = '';
-  if (people.find(p => p.name.toLowerCase() === trimmed.toLowerCase())) {
-    // Já existe: apenas selecionar e fechar
-    rebuildPeopleDropdown();
-    document.getElementById('assignee').value = trimmed;
-    document.getElementById('personForm').style.display = 'none';
+function closePeopleModal() {
+  document.getElementById('peopleModal').classList.remove('active');
+  rebuildPeopleDropdown();
+}
+
+function renderPeopleList() {
+  const container = document.getElementById('peopleList');
+  if (!container) return;
+  if (people.length === 0) {
+    container.innerHTML = '<div class="empty">Nenhum responsável cadastrado ainda.</div>';
     return;
   }
-  const role = (roleEl.value || '').trim();
-  const newPerson = { id: 'per_' + Date.now().toString(36), name: trimmed, role };
-  people.push(newPerson);
-  savePeople();
-  rebuildPeopleDropdown();
-  document.getElementById('assignee').value = newPerson.name;
-  document.getElementById('personForm').style.display = 'none';
+  container.innerHTML = people.map((p, i) => `
+    <div class="cat-item" style="grid-template-columns:none;display:flex;flex-direction:column;gap:6px">
+      <div style="display:flex;gap:6px;align-items:center">
+        <div style="width:34px;height:34px;border-radius:50%;background:#2563eb;color:white;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0">${escapeHtml(p.name.charAt(0).toUpperCase())}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:700;color:#0f172a">${escapeHtml(p.name)}</div>
+          <div style="font-size:11px;color:#64748b">${[p.role, p.sector].filter(Boolean).map(escapeHtml).join(' · ') || '<em>Sem função/setor</em>'}</div>
+        </div>
+        <button class="cat-delete" onclick="deletePerson(${i})">Remover</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <input type="text" value="${escapeHtml(p.role||'')}" placeholder="Função" style="border:1px solid #d1d5db;padding:5px 8px;border-radius:6px;font-size:12px;font-family:inherit" oninput="people[${i}].role=this.value;savePeople();renderPeopleList()">
+        <input type="text" value="${escapeHtml(p.sector||'')}" placeholder="Setor" style="border:1px solid #d1d5db;padding:5px 8px;border-radius:6px;font-size:12px;font-family:inherit" oninput="people[${i}].sector=this.value;savePeople();renderPeopleList()">
+      </div>
+    </div>`).join('');
 }
 
-function quickDeletePerson() {
-  const sel = document.getElementById('assignee');
-  const name = sel.value;
-  if (!name) { alert('Selecione um responsável para remover do cadastro.'); return; }
-  const idx = people.findIndex(p => p.name === name);
-  if (idx === -1) { alert('Responsável não encontrado no cadastro.'); return; }
-  const inUse = tasks.filter(t => t.assignee === name).length;
+function addPersonFromModal() {
+  const name = (document.getElementById('newPersonName').value || '').trim();
+  if (!name) { document.getElementById('newPersonName').focus(); return; }
+  if (people.find(p => p.name.toLowerCase() === name.toLowerCase())) {
+    alert('Já existe um responsável com este nome.'); return;
+  }
+  const role   = (document.getElementById('newPersonRole').value   || '').trim();
+  const sector = (document.getElementById('newPersonSector').value || '').trim();
+  people.push({ id: 'per_' + Date.now().toString(36), name, role, sector });
+  savePeople();
+  document.getElementById('newPersonName').value = '';
+  document.getElementById('newPersonRole').value = '';
+  document.getElementById('newPersonSector').value = '';
+  document.getElementById('newPersonName').focus();
+  renderPeopleList();
+}
+
+function deletePerson(idx) {
+  const p = people[idx];
+  const inUse = tasks.filter(t => t.assignee === p.name).length;
   const msg = inUse > 0
-    ? `"${name}" está atribuído a ${inUse} tarefa(s). Remover do cadastro? As tarefas mantêm o nome registrado.`
-    : `Remover "${name}" do cadastro de responsáveis?`;
+    ? `"${p.name}" está em ${inUse} tarefa(s). Remover do cadastro? As tarefas mantêm o nome.`
+    : `Remover "${p.name}" do cadastro?`;
   if (!confirm(msg)) return;
   people.splice(idx, 1);
   savePeople();
-  rebuildPeopleDropdown();
-  sel.value = '';
+  renderPeopleList();
+}
+
+// compatibilidade com chamadas antigas
+function togglePersonForm() { openPeopleModal(); }
+function confirmAddPerson() { addPersonFromModal(); }
+function quickDeletePerson() {
+  const sel = document.getElementById('assignee');
+  const name = sel?.value;
+  if (!name) return;
+  const idx = people.findIndex(p => p.name === name);
+  if (idx >= 0) deletePerson(idx);
 }
 
 function quickDeleteCategory() {
@@ -3792,8 +3858,157 @@ function generateCardFromSubtask(i, btn) {
   }
 }
 
+// ============ FOTOS ANTES / DEPOIS ============
+let modalPhotos = { antes: [], depois: [] };
+
+function compressImage(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX = 720;
+        let w = img.width, h = img.height;
+        if (w > MAX || h > MAX) {
+          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+          else { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', 0.72));
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handlePhotoUpload(side, input) {
+  const files = Array.from(input.files);
+  for (const file of files) {
+    const b64 = await compressImage(file);
+    modalPhotos[side].push(b64);
+  }
+  input.value = '';
+  renderModalPhotos();
+}
+
+function renderModalPhotos() {
+  const empty = '<div style="font-size:11px;color:#94a3b8;padding:6px;font-style:italic;width:100%">Nenhuma foto</div>';
+  ['antes','depois'].forEach(side => {
+    const el = document.getElementById('photoThumbs' + (side === 'antes' ? 'Antes' : 'Depois'));
+    if (!el) return;
+    el.innerHTML = modalPhotos[side].length
+      ? modalPhotos[side].map((src, i) => `
+          <div class="photo-thumb-wrap">
+            <img class="photo-thumb" src="${src}" onclick="openPhotoViewer('${side}',${i})" title="Clique para ampliar">
+            <button class="photo-thumb-del" onclick="removeModalPhoto('${side}',${i})" title="Remover">×</button>
+          </div>`).join('')
+      : empty;
+  });
+}
+
+function removeModalPhoto(side, idx) {
+  modalPhotos[side].splice(idx, 1);
+  renderModalPhotos();
+}
+
+function openPhotoViewer(side, idx) {
+  const src = modalPhotos[side][idx];
+  const total = modalPhotos[side].length;
+  let cur = idx;
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px';
+  const label = document.createElement('div');
+  label.style.cssText = 'color:white;font-size:12px;opacity:0.7';
+  const img = document.createElement('img');
+  img.style.cssText = 'max-width:90vw;max-height:80vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);object-fit:contain';
+  const nav = document.createElement('div');
+  nav.style.cssText = 'display:flex;gap:12px';
+  const btnPrev = document.createElement('button');
+  btnPrev.style.cssText = 'background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px';
+  btnPrev.textContent = '‹ Anterior';
+  const btnNext = document.createElement('button');
+  btnNext.style.cssText = btnPrev.style.cssText;
+  btnNext.textContent = 'Próxima ›';
+  const btnClose = document.createElement('button');
+  btnClose.style.cssText = 'position:fixed;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:white;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:18px;z-index:10000';
+  btnClose.textContent = '×';
+  function show(i) { cur = (i + total) % total; img.src = modalPhotos[side][cur]; label.textContent = (cur+1) + ' / ' + total + ' · ' + (side === 'antes' ? 'Antes' : 'Depois'); }
+  btnPrev.onclick = () => show(cur - 1);
+  btnNext.onclick = () => show(cur + 1);
+  btnClose.onclick = overlay.onclick = (e) => { if (e.target === overlay || e.target === btnClose) overlay.remove(); };
+  img.onclick = e => e.stopPropagation();
+  nav.appendChild(btnPrev); nav.appendChild(btnNext);
+  overlay.appendChild(label); overlay.appendChild(img);
+  if (total > 1) overlay.appendChild(nav);
+  overlay.appendChild(btnClose);
+  document.body.appendChild(overlay);
+  show(cur);
+}
+
+function renderCardPhotoBadge(task) {
+  const a = (task.photos?.antes || []).length;
+  const d = (task.photos?.depois || []).length;
+  if (a === 0 && d === 0) return '';
+  return `<div class="card-photos-badge" title="Fotos: ${a} antes · ${d} depois">📸 ${a > 0 ? `${a} antes` : ''}${a > 0 && d > 0 ? ' · ' : ''}${d > 0 ? `${d} depois` : ''}</div>`;
+}
+
 // ============ MÉTRICAS ESTRUTURADAS ============
 let modalMetrics = {}; // working copy: { tempo_medio: {before,after,unit}, ... }
+let modalPositiveFeedbacks = []; // [{id, category, text}]
+
+// ── Feedbacks Positivos ──
+function initPositiveFeedbacks(saved) {
+  modalPositiveFeedbacks = (saved || []).map(f => ({ id: f.id || ('fb_' + Date.now().toString(36) + Math.random().toString(36).slice(2,5)), category: f.category || '', text: f.text || '' }));
+  // preenche select de categorias
+  const sel = document.getElementById('fbCategorySelect');
+  if (sel) {
+    sel.innerHTML = '<option value="">— Categoria —</option>' +
+      categories.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+  }
+  document.getElementById('fbText') && (document.getElementById('fbText').value = '');
+  renderPositiveFeedbacks();
+}
+
+function renderPositiveFeedbacks() {
+  const container = document.getElementById('positiveFeedbacksList');
+  if (!container) return;
+  if (modalPositiveFeedbacks.length === 0) {
+    container.innerHTML = '<div style="font-size:12px;color:#94a3b8;padding:4px 0">Nenhum feedback registrado.</div>';
+    return;
+  }
+  container.innerHTML = modalPositiveFeedbacks.map((f, i) => {
+    const cat = categories.find(c => c.id === f.category);
+    const badge = cat
+      ? `<span style="background:${cat.bg};color:${cat.text};padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;white-space:nowrap">${escapeHtml(cat.name)}</span>`
+      : (f.category ? `<span style="background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:10px;font-size:11px">${escapeHtml(f.category)}</span>` : '');
+    return `<div style="display:flex;gap:8px;align-items:flex-start;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:8px 10px">
+      <span style="font-size:16px;flex-shrink:0;margin-top:1px">💬</span>
+      <div style="flex:1;min-width:0">
+        ${badge ? badge + '<br>' : ''}
+        <span style="font-size:12px;color:#1e293b;line-height:1.4;display:block;margin-top:${cat?'4px':'0'}">${escapeHtml(f.text)}</span>
+      </div>
+      <button type="button" onclick="removePositiveFeedback(${i})" style="flex-shrink:0;background:none;border:none;cursor:pointer;font-size:14px;color:#94a3b8;padding:0;line-height:1" title="Remover">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function addPositiveFeedback() {
+  const text = (document.getElementById('fbText')?.value || '').trim();
+  if (!text) { document.getElementById('fbText')?.focus(); return; }
+  const category = document.getElementById('fbCategorySelect')?.value || '';
+  modalPositiveFeedbacks.push({ id: 'fb_' + Date.now().toString(36), category, text });
+  document.getElementById('fbText').value = '';
+  document.getElementById('fbCategorySelect').value = '';
+  renderPositiveFeedbacks();
+}
+
+function removePositiveFeedback(idx) {
+  modalPositiveFeedbacks.splice(idx, 1);
+  renderPositiveFeedbacks();
+}
 
 function renderMetricsGrid(metricsData) {
   modalMetrics = {};
@@ -4167,6 +4382,7 @@ function renderPresentation() {
           <div class="pres-result-pct">${arrow}${pctAbs}%</div>
           <div class="pres-result-info">
             <h3>${g.icon||'📊'} ${escapeHtml(g.label)}</h3>
+            ${g.process ? `<div style="font-size:11px;font-weight:700;color:#475569;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.4px">📍 ${escapeHtml(g.process)}</div>` : ''}
             <div class="pres-result-vals">${fmt(g.before)} ${escapeHtml(g.unit)} → ${fmt(g.after)} ${escapeHtml(g.unit)}</div>
             <div class="pres-result-task">📋 ${escapeHtml(t.title)}</div>
             <div style="margin-top:8px">${linksHtml}</div>

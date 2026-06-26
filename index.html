@@ -984,8 +984,9 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <button class="btn" onclick="exportData()">Backup JSON</button>
     <button class="btn" onclick="document.getElementById('importFile').click()">Importar</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block; background: rgb(16, 185, 129);" disabled="">✅ Publicado!</button>
+    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block;">🌐 Publicar dados</button>
     <button class="btn" id="publishHtmlBtn" onclick="publishHTMLToGitHub()" title="Publicar o arquivo HTML completo como index.html no repositório" style="display: inline-block;" disabled="">⏳ Publicando HTML...</button>
+    <button class="btn" id="importGhBtn" onclick="importFromGitHub()" title="Buscar dados do GitHub e aplicar aqui (sincroniza mudanças feitas no Vercel)" style="display: inline-block;">⬇ Sincronizar do GitHub</button>
     <button class="btn" id="ghConfigBtn" onclick="openGhConfigModal()" title="Configurar conexão com Vercel/GitHub" style="display: inline-block;">⚙️ Vercel</button>
   </div>
 </div>
@@ -4594,7 +4595,74 @@ function updatePublishBtnVisibility() {
   const hasConfig = !!(cfg.token && cfg.owner && cfg.repo);
   document.getElementById('publishBtn').style.display     = hasConfig ? 'inline-block' : 'none';
   document.getElementById('publishHtmlBtn').style.display = hasConfig ? 'inline-block' : 'none';
+  document.getElementById('importGhBtn').style.display    = hasConfig ? 'inline-block' : 'none';
   document.getElementById('ghConfigBtn').style.display    = 'inline-block';
+}
+
+async function importFromGitHub() {
+  const cfg = getGhConfig();
+  if (!cfg.token || !cfg.owner || !cfg.repo) { openGhConfigModal(); return; }
+
+  const btn = document.getElementById('importGhBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Buscando...';
+
+  try {
+    const branch = cfg.branch || 'main';
+    const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/data.json?ref=${branch}`;
+    const resp = await fetch(url, {
+      headers: { 'Authorization': `token ${cfg.token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!resp.ok) {
+      alert(`Erro ao buscar data.json: ${resp.status}. Verifique a configuração do GitHub.`);
+      btn.disabled = false; btn.textContent = '⬇ Sincronizar do GitHub';
+      return;
+    }
+    const info = await resp.json();
+    const jsonStr = decodeURIComponent(escape(atob(info.content.replace(/\n/g, ''))));
+    const snapshot = JSON.parse(jsonStr);
+
+    const publishedAt = snapshot.publishedAt ? new Date(snapshot.publishedAt).toLocaleString('pt-BR') : 'data desconhecida';
+    if (!confirm(`Dados do GitHub encontrados (publicados em ${publishedAt}).\n\nIsso vai substituir os dados locais pelos dados do repositório. Continuar?`)) {
+      btn.disabled = false; btn.textContent = '⬇ Sincronizar do GitHub';
+      return;
+    }
+
+    // Aplica snapshot no localStorage (mesma lógica do importData)
+    if (snapshot.projects) {
+      localStorage.setItem('kanban2_projects', JSON.stringify(snapshot.projects));
+    }
+    if (snapshot.activeProjectId) {
+      localStorage.setItem('kanban2_active_project', snapshot.activeProjectId);
+    }
+    if (snapshot.tasksByProject) {
+      Object.entries(snapshot.tasksByProject).forEach(([pid, tasks]) => {
+        localStorage.setItem('kanban2_tasks_' + pid, JSON.stringify(tasks));
+      });
+    }
+    if (snapshot.categoriesByProject) {
+      Object.entries(snapshot.categoriesByProject).forEach(([pid, cats]) => {
+        localStorage.setItem('kanban2_categories_' + pid, JSON.stringify(cats));
+      });
+    }
+    if (snapshot.cyclesByProject) {
+      Object.entries(snapshot.cyclesByProject).forEach(([pid, cycles]) => {
+        localStorage.setItem('kanban2_cycles_' + pid, JSON.stringify(cycles));
+      });
+    }
+    if (snapshot.wipLimitsByProject) {
+      Object.entries(snapshot.wipLimitsByProject).forEach(([pid, wip]) => {
+        localStorage.setItem('kanban2_wip_' + pid, JSON.stringify(wip));
+      });
+    }
+
+    btn.textContent = '✅ Sincronizado!';
+    btn.style.background = '#10b981';
+    setTimeout(() => { window.location.reload(); }, 1200);
+  } catch(e) {
+    alert('Erro ao importar: ' + e.message);
+    btn.disabled = false; btn.textContent = '⬇ Sincronizar do GitHub';
+  }
 }
 
 async function publishHTMLToGitHub() {

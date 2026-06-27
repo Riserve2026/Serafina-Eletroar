@@ -984,7 +984,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <button class="btn" onclick="exportData()">Backup JSON</button>
     <button class="btn" onclick="document.getElementById('importFile').click()">Importar</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
-    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block;">🌐 Publicar dados</button>
+    <button class="btn btn-primary" id="publishBtn" onclick="publishToGitHub()" title="Publicar dados (data.json) no Vercel" style="display: inline-block; background: rgb(16, 185, 129);" disabled="">✅ Publicado!</button>
     <button class="btn" id="publishHtmlBtn" onclick="publishHTMLToGitHub()" title="Publicar o arquivo HTML completo como index.html no repositório" style="display: inline-block;" disabled="">⏳ Publicando HTML...</button>
     <button class="btn" id="importGhBtn" onclick="importFromGitHub()" title="Buscar dados do GitHub e aplicar aqui (sincroniza mudanças feitas no Vercel)" style="display: inline-block;">⬇ Sincronizar do GitHub</button>
     <button class="btn" id="ghConfigBtn" onclick="openGhConfigModal()" title="Configurar conexão com Vercel/GitHub" style="display: inline-block;">⚙️ Vercel</button>
@@ -995,7 +995,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
   <label>Ciclo:</label>
   <select id="filterCycle" onchange="render()"><option value="">Todos</option></select>
   <label>Categoria:</label>
-  <select id="filterCategory" onchange="render()"><option value="">Todas</option><option value="produtividade">Produtividade</option><option value="gestao_visual">Gestão Visual</option><option value="processos">Processos</option><option value="feedbacks_individuais">Feedbacks-Individuais</option><option value="reunioes_equipe">Reuniões com a equipe</option></select>
+  <select id="filterCategory" onchange="render()"><option value="">Todas</option></select>
   <label>Prioridade:</label>
   <select id="filterPriority" onchange="render()">
     <option value="">Todas</option>
@@ -1027,7 +1027,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1044,7 +1044,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1061,7 +1061,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1078,7 +1078,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#ede9fe;color:#6b21a8">Processos</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1095,7 +1095,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1112,7 +1112,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#ede9fe;color:#6b21a8">Processos</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1129,7 +1129,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1146,7 +1146,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#ede9fe;color:#6b21a8">Processos</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1163,7 +1163,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#d1fae5;color:#065f46">Reuniões com a equipe</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1180,7 +1180,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1204,13 +1204,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       <div class="card-date overdue">02/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1221,13 +1221,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1238,13 +1238,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#fef3c7;color:#92400e">Gestão Visual</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1255,13 +1255,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1272,13 +1272,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       <div class="card-date ">31/07</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1289,13 +1289,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       <div class="card-date overdue">02/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1306,20 +1306,20 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     </div><div class="column">
       <div class="column-header">
         <div class="column-title"><span class="column-dot" style="background:#f59e0b"></span>Em Andamento</div>
-        <span class="column-count over-limit" onclick="editWipLimit('andamento')" title="Limite WIP: 3. Clique para alterar.">6 / 3</span>
+        <span class="column-count " onclick="editWipLimit('andamento')" title="Sem limite. Clique para definir limite WIP.">6</span>
       </div>
       <div class="cards" data-column="andamento"><div class="card card-priority-alta" draggable="true">
     <div class="card-title"><span style="font-size:10px;font-weight:700;color:#94a3b8;margin-right:5px;font-variant-numeric:tabular-nums">#11</span>Movimentação do Giro ABC</div>
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-alta">Alta</span>
       </div>
       <div class="card-date overdue">19/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1330,13 +1330,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-alta">Alta</span>
       </div>
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1347,13 +1347,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       <div class="card-date ">31/07</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1364,13 +1364,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#fce7f3;color:#9f1239">Feedbacks-Individuais</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       <div class="card-date ">30/09</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1381,13 +1381,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-alta">Alta</span>
       </div>
       <div class="card-date overdue">02/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1398,13 +1398,13 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-alta">Alta</span>
       </div>
       <div class="card-date ">30/06</div>
     </div>
     
-    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 2d</span></div>
+    <div style="margin-top:5px;display:flex;gap:5px;flex-wrap:wrap;align-items:center"><span class="card-cycle-time " title="Tempo na coluna atual">⏱ 3d</span></div>
     
     
     
@@ -1422,7 +1422,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Organização visual do ambiente na área de carga de mercadoria</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#fef3c7;color:#92400e">Gestão Visual</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1439,7 +1439,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Demarcar área de acomodação de mercadoria pós descarga</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#fef3c7;color:#92400e">Gestão Visual</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1456,7 +1456,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#fce7f3;color:#9f1239">Feedbacks-Individuais</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1473,7 +1473,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Conversa para conhecer melhor o comportamento individual e orientar como será o andamento do projeto</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#fce7f3;color:#9f1239">Feedbacks-Individuais</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1490,7 +1490,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Conversa de forma geral, sobre postura e desafios da nova posição de trabalho</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#fce7f3;color:#9f1239">Feedbacks-Individuais</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1507,7 +1507,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Correias da Gates estão espalhadas pelo chão, no mezanino</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1524,7 +1524,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Objetivo da reunião é conscientizar a equipe sobre a organização que está sendo feita no estoque. A reunião foi feita em…</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#d1fae5;color:#065f46">Reuniões com a equipe</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1541,7 +1541,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1558,7 +1558,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Palhetas estão todas misturadas e desorganizadas, organização prévia das palhetas de vetor aproveitando o momento de fol…</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1575,7 +1575,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
     <div class="card-desc">Impressora estava na mesa do Bernardo</div>
     <div class="card-meta">
       <div class="tags">
-        <span class="tag" style="background:#dbeafe;color:#1e40af">Produtividade</span>
+        <span class="tag" style="background:#f1f5f9;color:#475569">Sem categoria</span>
         <span class="tag tag-priority-media">Média</span>
       </div>
       
@@ -1843,7 +1843,7 @@ body[data-theme="dark-green"] .dash-result-row { background: #176460; }
       <div class="form-group">
         <label>Categoria</label>
         <div style="display:flex;gap:6px;align-items:center">
-          <select id="category" style="flex:1"><option value="produtividade">Produtividade</option><option value="gestao_visual">Gestão Visual</option><option value="processos">Processos</option><option value="feedbacks_individuais">Feedbacks-Individuais</option><option value="reunioes_equipe">Reuniões com a equipe</option></select>
+          <select id="category" style="flex:1"></select>
           <button type="button" class="btn-icon" onclick="quickAddCategory()" title="Nova categoria">+</button>
           <button type="button" class="btn-icon btn-icon-danger" onclick="quickDeleteCategory()" title="Excluir categoria selecionada">🗑</button>
         </div>
